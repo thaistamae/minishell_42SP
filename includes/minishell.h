@@ -1,3 +1,11 @@
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 typedef enum e_token_type
 {
 	T_WORD,
@@ -43,3 +51,5 @@ typedef struct s_shell
 	t_token		*tokens;
 	t_command	*cmds;
 }   t_shell;
+
+#endif
