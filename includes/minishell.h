@@ -52,4 +52,12 @@ typedef struct s_shell
 	t_command	*cmds;
 }   t_shell;
 
+t_token	*new_token(char *value, t_token_type type);
+void	add_token_back(t_token **list, t_token *new);
+void	free_tokens(t_token *list);
+
+t_token	*lexer(char *line);
+
+int		is_space(char c);
+
 #endif
