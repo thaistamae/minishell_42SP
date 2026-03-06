@@ -6,11 +6,12 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 15:59:29 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/02/25 17:55:52 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/05 18:30:54 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "executor.h"
 
 int	is_builtin(char *cmd)
 {
@@ -53,3 +54,4 @@ int execute_builtin(t_command *cmd, t_env *env)
 		return (builtin_unset(cmd, env));
 	return (0);
 }
+

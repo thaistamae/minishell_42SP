@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 22:09:10 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/02/25 18:39:20 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/05 18:24:37 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	execute_external(t_command *cmd, t_env *env)
 	pid_t	pid;
 	int		status;
 	char	*path;
+	char	**envp;
 	
 	//Verificação de cmd
 	if (!cmd || !cmd->args || !cmd->args[0]) 
@@ -46,7 +47,9 @@ int	execute_external(t_command *cmd, t_env *env)
 	//No processo filho (pid == 0)
 	if (pid == 0)
 	{
-		execve(path, cmd->args, env->envp);
+		envp = env_to_array(env);
+		execve(path, cmd->args, envp);
+		free_array(envp);
 		exit(1); //Se execve falhar
 	}
 	free(path);

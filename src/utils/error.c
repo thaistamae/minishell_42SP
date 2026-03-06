@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 15:52:41 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/02/26 15:49:15 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/06 04:17:36 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,4 @@ int	error_fork()
 {
 	ft_putstr_fd("minishell: fork error\n", 2);
 	return (1);
-}
-
-void	free_array(char **array)
-{
-
 }

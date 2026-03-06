@@ -18,6 +18,7 @@ SRCS = \
 	$(SRC_DIR)/env/env_init.c \
 	$(SRC_DIR)/env/env_utils.c \
 	$(SRC_DIR)/executor/executor.c \
+	$(SRC_DIR)/executor/exec.utils.c \
 	$(SRC_DIR)/executor/pipes.c \
 	$(SRC_DIR)/executor/redirections.c \
 	$(SRC_DIR)/expander/expander.c \
