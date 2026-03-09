@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:04:42 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/05 18:20:48 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:58:28 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 char	*find_executable(char *cmd, t_env *env)
 {
-	char    *path_value;
-	char    *temp;
-	char    **dirs;
-	char    *full_path;
-	int     i;
-	 
-	if  (ft_strchr(cmd, '/') != NULL)
+	int		i;
+	char	**dirs;
+	char	*full_path;
+	char	*path_value;
+	char	*path_value;
+	if (ft_strchr(cmd, '/') != NULL)
 	{
 		if (access(cmd, X_OK) == 0)
 			return (ft_strdup(cmd));
