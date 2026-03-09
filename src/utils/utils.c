@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 15:59:29 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/05 18:30:54 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/09 20:04:55 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ int	is_builtin(char *cmd)
 {
 	if (!cmd || cmd[0] == '\0')
 		return (0);
-	if (ft_strncmp(cmd, "cd", 3) == 0)
+	if (ft_strncmp(cmd, "cd" ) == 0)
 		return (1);
-	if (ft_strncmp(cmd, "echo", 5) == 0)
+	if (ft_strncmp(cmd, "echo") == 0)
 		return (1);
-	if (ft_strncmp(cmd, "env", 4) == 0)
+	if (ft_strncmp(cmd, "env") == 0)
 		return (1);
-	if (ft_strncmp(cmd, "exit", 5) == 0)
+	if (ft_strncmp(cmd, "exit") == 0)
 		return (1);
-	if (ft_strncmp(cmd, "export", 7) == 0)
+	if (ft_strncmp(cmd, "export") == 0)
 		return (1);
-	if (ft_strncmp(cmd, "pwd", 4) == 0)
+	if (ft_strncmp(cmd, "pwd") == 0)
 		return (1);
-	if (ft_strncmp(cmd, "unset", 6) == 0)
+	if (ft_strncmp(cmd, "unset") == 0)
 		return (1);
 	return (0);
 }

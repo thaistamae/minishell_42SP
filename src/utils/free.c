@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 19:02:50 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/05 18:27:02 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/09 20:01:42 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	free_array(char **array)
 		free(array[i]);
 		i++;
 	}
-	free_array(array);
+	array(array);
 	return (0);
 }
