@@ -1,6 +1,8 @@
 #include "minishell.h"
+#include "libft.h"
 
-void handle_pipe(t_token **list, int *i)
+//Inclui os tokens de | na lista linkada
+static void handle_pipe(t_token **list, int *i)
 {
 	t_token	*new;
 
@@ -11,60 +13,29 @@ void handle_pipe(t_token **list, int *i)
 	(*i)++;
 }
 
-void handle_word(char *line, t_token **list, int *i)
-{
-	int		start;
-	int 	len;
-	char	*word;
-	t_token	*new;
-
-	start = *i;
-	len = 0;
-	while (line[*i] &&
-		line[*i] != ' ' &&
-		line[*i] != '\t' && 
-		line[*i] != '|' && 
-		line[*i] != '<' && 
-		line[*i] != '>'
-	)
-	{
-		(*i)++;
-	}
-	len = *i - start;
-	word = ft_substr(line, start, len);
-	if (!word)
-		return;
-	new = new_token(word, T_WORD);
-	if (!new)
-	{
-		free(word);
-		return;
-	}
-	add_token_back(list, new);
-}
-
-void handle_redirection(t_token **list, char *line, int *i)
+//Inclui os tokens de redirection na lista linkada
+static void handle_redirection(t_token **list, char *line, int *i)
 {
 	t_token	*new;
 
 	if (line[*i] == '>' && line[*i + 1] == '>')
 	{
-		new = new_token(ft_strdup(">>"), T_APPEND)
+		new = new_token(ft_strdup(">>"), T_APPEND);
 		(*i) += 2;
 	}
 	else if (line[*i] == '<' && line[*i + 1] == '<')
 	{
-		new = new_token(ft_strdup("<<"), T_HEREDOC)
+		new = new_token(ft_strdup("<<"), T_HEREDOC);
 		(*i) += 2;
 	}
 	else if (line[*i] == '>')
 	{
-		new = new_token(ft_strdup(">"), T_REDIR_OUT);
+		new = new_token(ft_strdup(">"), T_REDIRECT_OUT);
 		(*i)++;
 	}
-	else (line[*] == '<')
+	else if (line[*i] == '<')
 	{
-		new = new_token(ft_strdup("<"), T_REDIR_IN);
+		new = new_token(ft_strdup("<"), T_REDIRECT_IN);
 		(*i)++;
 	}
 	if (!new)
@@ -72,7 +43,9 @@ void handle_redirection(t_token **list, char *line, int *i)
 	add_token_back(list, new);
 }
 
-t_token *lexer(char *line)
+//Lê a linha de comando e chama outros métodos
+//para criar uma lista linkada de tokens de acordo com os tipos dos comandos
+t_token *lexer(char *line, t_shell *shell)
 {
 	t_token	*list;
 	int		i;
@@ -82,16 +55,14 @@ t_token *lexer(char *line)
 
 	while (line[i])
 	{
-		if (is_space(line[i]))
+		if (ft_isspace(line[i]))
 			i++;
 		else if (line[i] == '|')
 			handle_pipe(&list, &i);
 		else if (line[i] == '>' || line[i] == '<')
 			handle_redirection(&list, line, &i);
-		else if (line[i] == '\'' || line[i] == '"')
-			handle_quotes(...)
 		else
-			handle_word(line, &list, &i);
+			handle_word(line, &i, &list, shell);
 	}
 	return (list);
 }
