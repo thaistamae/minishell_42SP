@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 16:59:19 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/05 18:01:40 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/14 01:32:30 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**env_to_array(t_env *env)
 	}
 	envp = malloc(sizeof(char *) * (count + 1));
 	if (!envp)
-		return NULL;
+		return (NULL);
 	current = env;
 	i = 0;
 	while (current)

@@ -3,38 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 15:59:29 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/09 20:04:55 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/14 01:50:37 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "executor.h"
 
-int	is_builtin(char *cmd)
-{
-	if (!cmd || cmd[0] == '\0')
-		return (0);
-	if (ft_strncmp(cmd, "cd" ) == 0)
-		return (1);
-	if (ft_strncmp(cmd, "echo") == 0)
-		return (1);
-	if (ft_strncmp(cmd, "env") == 0)
-		return (1);
-	if (ft_strncmp(cmd, "exit") == 0)
-		return (1);
-	if (ft_strncmp(cmd, "export") == 0)
-		return (1);
-	if (ft_strncmp(cmd, "pwd") == 0)
-		return (1);
-	if (ft_strncmp(cmd, "unset") == 0)
-		return (1);
-	return (0);
-}
-
-int execute_builtin(t_command *cmd, t_env *env)
+int	execute_builtin(t_command *cmd, t_env *env)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (1);
@@ -54,4 +33,3 @@ int execute_builtin(t_command *cmd, t_env *env)
 		return (builtin_unset(cmd, env));
 	return (0);
 }
-
