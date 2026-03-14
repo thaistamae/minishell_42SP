@@ -1,29 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/14 01:31:23 by kaidda-s          #+#    #+#             */
+/*   Updated: 2026/03/14 01:31:23 by kaidda-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-//Por enquanto usada apenas para testar a tokenização
-int	main(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
+// int main(void)
+// {
+// 	char	*line;
 
-	char	*line;
-	t_shell	shell;
-
-	shell.envp = envp;
-	shell.exit_status = 0;
-
-	while (1)
-	{
-		line = readline("minishell$ ");
-		if (!line)
-			break;
-		if (*line)
-			add_history(line);
-
-		shell.tokens = lexer(line, &shell);
-		print_tokens(shell.tokens);
-
-		free_tokens(shell.tokens);
-		free(line);
-	}
-}
+// 	while (1)
+// 	{
+// 		line = readline("minishell$ ");
+// 		if(!line)
+// 			break;
+// 		if(*line)
+// 			add_history(line);
+// 		free(line);
+// 	}
+// 	return (0);
+// }

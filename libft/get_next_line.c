@@ -84,13 +84,13 @@ static char	*read_to_stash(int fd, char	*stash)
 			free(buffer);
 			free(stash);
 			return (NULL);
-		}	
+		}
 		buffer[bytes_read] = '\0';
 		tmp = ft_strjoin(stash, buffer);
 		free(stash);
 		stash = tmp;
 		free(buffer);
-	}	
+	}
 	return (stash);
 }
 
