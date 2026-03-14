@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "redirections.h"
 
 //Abre arquivo para <
 int	open_input_file(t_redir *redir)

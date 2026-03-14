@@ -13,7 +13,7 @@
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
-# include "minishell.h"
+#include "structs.h"
 
 int		execute_command(t_command *cmd, t_env *env);
 int		execute_external(t_command *cmd, t_env *env);

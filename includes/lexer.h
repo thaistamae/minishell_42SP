@@ -1,6 +1,8 @@
 #ifndef LEXER_H
 # define LEXER_H
 
+#include "structs.h"
+
 t_token	*new_token(char *value, t_token_type type);
 void	add_token_back(t_token **list, t_token *new);
 void	free_tokens(t_token *list);
