@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "redirections.h"
 
 // Guarda os fds originais antes de redirecionar
 int	save_std_fds(int *saved_stdin, int *saved_stdout)

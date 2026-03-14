@@ -22,6 +22,7 @@ SRCS = \
 	$(SRC_DIR)/executor/exec.utils.c \
 	$(SRC_DIR)/executor/pipes.c \
 	$(SRC_DIR)/executor/redirections.c \
+	$(SRC_DIR)/executor/redir.utils.c \
 	$(SRC_DIR)/expander/expander.c \
 	$(SRC_DIR)/expander/quotes.c \
 	$(SRC_DIR)/lexer/lexer.c \
@@ -64,29 +65,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
-# NAME = minishell
-
-# CC = gcc
-# CFLAGS = -Wall -Wextra -Werror -Iincludes
-
-# LIBS = -lreadline
-
-# SRCS = src/main.c
-# OBJS = $(SRCS:.c=.o)
-
-# all: $(NAME)
-
-# $(NAME): $(OBJS)
-# 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
-
-# %.o: %.c
-# 	$(CC) $(CFLAGS) -c $< -o $@
-
-# clean:
-# 	rm -f $(OBJS)
-
-# fclean: clean
-# 	rm -f $(NAME)
-
-# re: fclean all

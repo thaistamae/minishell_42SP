@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "executor.h"
 
 char	*get_env_value(char *key, t_env *env)
 {

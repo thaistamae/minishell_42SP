@@ -12,18 +12,18 @@
 
 #include "minishell.h"
 
-// int main(void)
-// {
-// 	char	*line;
+int main(void)
+{
+	char	*line;
 
-// 	while (1)
-// 	{
-// 		line = readline("minishell$ ");
-// 		if(!line)
-// 			break;
-// 		if(*line)
-// 			add_history(line);
-// 		free(line);
-// 	}
-// 	return (0);
-// }
+	while (1)
+	{
+		line = readline("minishell$ ");
+		if(!line)
+			break;
+		if(*line)
+			add_history(line);
+		free(line);
+	}
+	return (0);
+}

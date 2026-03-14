@@ -3,7 +3,7 @@
 
 //Busca o valor de uma variável de ambiente no envp
 //Retorna apenas a parte após o '='
-static char	*get_env_value(char *var, char **envp)
+static char	*get_env_value_from_envp(char *var, char **envp)
 {
 	int	i;
 	int	len;
@@ -66,7 +66,7 @@ static void	handle_env_var(char *line, int *i,
 	var = ft_substr(line, start, *i - start);
 	if (!var)
 		return ;
-	value = get_env_value(var, shell->envp);
+	value = get_env_value_from_envp(var, shell->envp);
 	if (value)
 		append_str(b, value);
 	free(var);
