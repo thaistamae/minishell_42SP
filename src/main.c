@@ -12,17 +12,34 @@
 
 #include "minishell.h"
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
 	char	*line;
+	t_token	*tokens;
+	t_shell	shell;
+	t_command *cmds;
 
+	(void)argc;
+	(void)argv;
+	shell.envp = envp;
+	shell.exit_status = 0;
 	while (1)
 	{
 		line = readline("minishell$ ");
-		if(!line)
+		if (!line)
 			break;
-		if(*line)
+		if (*line)
 			add_history(line);
+		tokens = lexer(line, &shell);
+		print_tokens(tokens);		
+		if (!validate_syntax(tokens))
+			printf("minishell: sintax error \n");
+		else
+		{
+			cmds = parse_commands(tokens);
+			print_commands(cmds);
+		}		
+		free_tokens(tokens);
 		free(line);
 	}
 	return (0);
