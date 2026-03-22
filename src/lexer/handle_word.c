@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_word.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/22 13:38:36 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/22 13:38:38 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-#include "libft.h"
 
 //Lida com conteúdo entre aspas simples ou duplas
 //Adiciona os caracteres ao buffer até encontrar a aspas de fechamento
 //Permite expansão de variáveis apenas dentro de aspas duplas
-static int handle_quotes(char *line, int *i, t_builder *b, t_shell *shell)
+static int	handle_quotes(char *line, int *i, t_builder *b, t_shell *shell)
 {
-	char quote;
+	char	quote;
 
 	quote = line[*i];
-	(*i)++; 
+	(*i)++;
 	while (line[*i] && line[*i] != quote)
 	{
 		if (quote == '"' && line[*i] == '$')
@@ -53,7 +64,7 @@ static int	build_word(char *line, int *i,
 
 //Adiciona um caractere ao buffer do builder
 //Realoca o buffer caso a capacidade seja atingida
-void append_char(char **buffer, int *len, int *cap, char c)
+void	append_char(char **buffer, int *len, int *cap, char c)
 {
 	char	*new_buffer;
 	int		i;

@@ -31,7 +31,7 @@ SRCS = \
 	$(SRC_DIR)/lexer/handle_word.c \
 	$(SRC_DIR)/parser/parser.c \
 	$(SRC_DIR)/parser/parser_redir.c \
-	$(SRC_DIR)/parser/parser_utils.c \
+	$(SRC_DIR)/parser/parser_arg.c \
 	$(SRC_DIR)/parser/validate_syntax.c \
 	$(SRC_DIR)/signals/signals.c \
 	$(SRC_DIR)/utils/error.c \

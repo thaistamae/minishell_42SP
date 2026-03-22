@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_dollar.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/22 13:38:01 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/22 13:38:13 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-#include "libft.h"
 
 //Busca o valor de uma variável de ambiente no envp
 //Retorna apenas a parte após o '='
@@ -35,8 +46,7 @@ static void	append_str(t_builder *b, char *str)
 
 //Lida com a expansão da variável especial $?
 //Adiciona o exit_status atual do shell ao buffer
-static int	handle_exit_status(char *line, int *i, 
-								t_builder *b, t_shell *shell)
+static int	handle_exit_status(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	char	*status;
 

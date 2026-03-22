@@ -1,20 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/22 13:38:44 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/22 13:38:46 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-#include "libft.h"
 
 //Inclui os tokens de | na lista linkada
-static void handle_pipe(t_token **list, int *i)
+static void	handle_pipe(t_token **list, int *i)
 {
 	t_token	*new;
 
 	new = new_token(ft_strdup("|"), T_PIPE);
 	if (!new)
-		return;
+		return ;
 	add_token_back(list, new);
 	(*i)++;
 }
 
 //Inclui os tokens de redirection na lista linkada
-static void handle_redirection(t_token **list, char *line, int *i)
+static void	handle_redirection(t_token **list, char *line, int *i)
 {
 	t_token	*new;
 
@@ -45,14 +56,13 @@ static void handle_redirection(t_token **list, char *line, int *i)
 
 //Lê a linha de comando e chama outros métodos
 //para criar uma lista linkada de tokens de acordo com os tipos dos comandos
-t_token *lexer(char *line, t_shell *shell)
+t_token	*lexer(char *line, t_shell *shell)
 {
 	t_token	*list;
 	int		i;
 
 	list = NULL;
 	i = 0;
-
 	while (line[i])
 	{
 		if (ft_isspace(line[i]))

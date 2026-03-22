@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/22 13:40:12 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/22 13:40:14 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -14,7 +26,7 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	char			*value;
-	t_token_type 	type;
+	t_token_type	type;
 	struct s_token	*next;
 }	t_token;
 
@@ -30,13 +42,13 @@ typedef struct s_redir
 	t_token_type	type;
 	char			*file;
 	struct s_redir	*next;
-}   t_redir;
+}	t_redir;
 
-typedef	struct s_command
+typedef struct s_command
 {
 	char				**args;
 	t_redir				*redirs;
-	struct	s_command	*next; 
+	struct s_command	*next;
 }	t_command;
 
 typedef struct s_builder

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokens.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/22 13:38:52 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/22 13:38:54 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 //Cria um token
-t_token *new_token(char *value, t_token_type type)
+t_token	*new_token(char *value, t_token_type type)
 {
 	t_token	*new;
 
@@ -15,23 +27,23 @@ t_token *new_token(char *value, t_token_type type)
 }
 
 //Adiciona um token no final da lista linkada
-void add_token_back(t_token **list, t_token *new)
+void	add_token_back(t_token **list, t_token *new)
 {
 	t_token	*tmp;
 
-	if(!*list)
+	if (!*list)
 	{
 		*list = new;
-		return;
+		return ;
 	}
 	tmp = *list;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = new;	
+	tmp->next = new;
 }
 
 //Libera todos os tokens e memória da lista linkada
-void free_tokens(t_token *list)
+void	free_tokens(t_token *list)
 {
 	t_token	*tmp;
 
