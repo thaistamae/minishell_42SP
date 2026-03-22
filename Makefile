@@ -29,6 +29,7 @@ SRCS = \
 	$(SRC_DIR)/lexer/tokens.c \
 	$(SRC_DIR)/lexer/handle_dollar.c \
 	$(SRC_DIR)/lexer/handle_word.c \
+	$(SRC_DIR)/lexer/validate_line.c \
 	$(SRC_DIR)/parser/parser.c \
 	$(SRC_DIR)/parser/parser_redir.c \
 	$(SRC_DIR)/parser/parser_arg.c \

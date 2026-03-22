@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	char	*line;
-	t_token	*tokens;
-	t_shell	shell;
-	t_command *cmds;
+	char		*line;
+	t_token		*tokens;
+	t_shell		shell;
+	t_command	*cmds;
 
 	(void)argc;
 	(void)argv;
@@ -27,11 +27,17 @@ int main(int argc, char **argv, char **envp)
 	{
 		line = readline("minishell$ ");
 		if (!line)
-			break;
+			break ;
 		if (*line)
 			add_history(line);
+		if (has_invalid_chars(line) || has_unclosed_quotes(line))
+		{
+			printf("minishell: syntax error\n");
+			free(line);
+			continue ;
+		}
 		tokens = lexer(line, &shell);
-		print_tokens(tokens);		
+		print_tokens(tokens);
 		if (!validate_syntax(tokens))
 			printf("minishell: sintax error \n");
 		else
@@ -40,6 +46,7 @@ int main(int argc, char **argv, char **envp)
 			print_commands(cmds);
 		}		
 		free_tokens(tokens);
+		free_commands(cmds);
 		free(line);
 	}
 	return (0);

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/22 14:31:22 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/22 14:31:24 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 //Método apenas para testes
-void print_tokens(t_token *list)
+void	print_tokens(t_token *list)
 {
 	while (list)
 	{
@@ -36,4 +48,3 @@ void	print_commands(t_command *cmd)
 		cmd = cmd->next;
 	}
 }
-

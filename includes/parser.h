@@ -13,10 +13,11 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "structs.h"
+# include "structs.h"
 
 int			validate_syntax(t_token *tokens);
 t_command	*parse_commands(t_token *tokens);
+void		free_commands(t_command *cmd);
 t_command	*new_command(void);
 int			add_arg(t_command *cmd, char *value);
 t_redir		*new_redir(t_token_type type, char *file);

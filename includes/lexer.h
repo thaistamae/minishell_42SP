@@ -15,6 +15,8 @@
 
 # include "structs.h"
 
+int		has_unclosed_quotes(char *line);
+int		has_invalid_chars(char *line);
 t_token	*new_token(char *value, t_token_type type);
 void	add_token_back(t_token **list, t_token *new);
 void	free_tokens(t_token *list);
