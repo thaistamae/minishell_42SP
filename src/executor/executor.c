@@ -14,13 +14,23 @@
 #include "executor.h"
 #include "redirections.h"
 
+static void exec_child_process(t_command *cmd, t_env *env, char *path)
+{
+	char	**envp;
+
+	envp = env_to_array(env);
+	execve(path, cmd->args, envp);
+	perror("minishell: execve");
+	free_array(envp);
+	exit(1);
+}
+
 //Função para comandos externos ex.: ls, mv, rm, mkdir...
 int	execute_external(t_command *cmd, t_env *env)
 {
 	pid_t	pid;
 	int		status;
 	char	*path;
-	char	**envp;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (1);
@@ -31,12 +41,7 @@ int	execute_external(t_command *cmd, t_env *env)
 	if (pid < 0)
 		return (error_fork());
 	if (pid == 0)
-	{
-		envp = env_to_array(env);
-		execve(path, cmd->args, envp);
-		free_array(envp);
-		exit(1);
-	}
+		exec_child_process(cmd, env, path);
 	free(path);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
@@ -46,15 +51,25 @@ int	execute_external(t_command *cmd, t_env *env)
 	return (1);
 }
 
-// TODO: Implementar builtins depois
+// Execução de funções externas
 int	execute_builtin(t_command *cmd, t_env *env)
 {
-	(void)env;
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (1);
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(cmd->args[0], STDERR_FILENO);
-	ft_putstr_fd(": builtin not implemented yet\n", STDERR_FILENO);
+	if (ft_strcmp(cmd->args[0], "echo") == 0)
+		return (builtin_echo(cmd));
+	if (ft_strcmp(cmd->args[0], "cd") == 0)
+		return (builtin_cd(cmd, env));
+	if (ft_strcmp(cmd->args[0], "pwd") == 0)
+		return (builtin_pwd());
+	if (ft_strcmp(cmd->args[0], "env") == 0)
+		return (builtin_env(env));
+	if (ft_strcmp(cmd->args[0], "export") == 0)
+		return (builtin_export(cmd, env));
+	if (ft_strcmp(cmd->args[0], "unset") == 0)
+		return (builtin_unset(cmd, env));
+	if (ft_strcmp(cmd->args[0], "exit") == 0)
+		return (builtin_exit(cmd));
 	return (1);
 }
 
@@ -63,6 +78,8 @@ int	execute_command(t_command *cmd, t_env *env)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (1);
+	if (cmd->next)
+		return (execute_pipeline(cmd, env));
 	if (is_builtin(cmd->args[0]))
 		return (execute_builtin(cmd, env));
 	return (execute_external(cmd, env));

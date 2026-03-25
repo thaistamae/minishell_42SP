@@ -33,7 +33,9 @@ SRCS = \
 	$(SRC_DIR)/signals/signals.c \
 	$(SRC_DIR)/utils/error.c \
 	$(SRC_DIR)/utils/free.c \
-	$(SRC_DIR)/utils/utils.c
+	$(SRC_DIR)/utils/utils.c \
+	$(SRC_DIR)/executor/pipes_utils.c
+
 
 OBJS = $(SRCS:.c=.o)
 

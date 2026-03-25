@@ -13,7 +13,7 @@
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
-#include "structs.h"
+# include "structs.h"
 
 int		execute_command(t_command *cmd, t_env *env);
 int		execute_external(t_command *cmd, t_env *env);
@@ -35,5 +35,14 @@ char	*get_env_value(char *key, t_env *env);
 int		error_command_not_found(char *cmd);
 int		error_fork(void);
 void	free_array(char **array);
+
+int		execute_pipeline(t_command *cmd, t_env *env);
+
+//pipes utilities (usados por pipes.c)
+int		count_commands(t_command *cmd);
+pid_t	*alloc_pids(int n);
+void	safe_close(int fd);
+int		wait_children(pid_t *pids, int n);
+void	setup_child_fds(int prev_fd, int pipe_write);
 
 #endif

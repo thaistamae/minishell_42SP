@@ -26,5 +26,6 @@
 # include "parser.h"
 # include "redirections.h"
 # include "structs.h"
+# include "builtins.h"
 
 #endif
