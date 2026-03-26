@@ -7,7 +7,7 @@ t_token	*new_token(char *value, t_token_type type);
 void	add_token_back(t_token **list, t_token *new);
 void	free_tokens(t_token *list);
 
-void 	append_char(char **buffer, int *len, int *cap, char c);
+void	append_char(char **buffer, int *len, int *cap, char c);
 
 t_token *lexer(char *line, t_shell *shell);
 void	handle_word(char *line, int *i, t_token **list, t_shell *shell);

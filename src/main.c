@@ -13,50 +13,89 @@
 #include "minishell.h"
 #include "executor.h"
 #include "structs.h"
-// int main(void)
-// {
-// 	char	*line;
+#include "signal.h"
 
-// 	while (1)
-// 	{
-// 		line = readline("minishell$ ");
-// 		if(!line)
-// 			break;
-// 		if(*line)
-// 			add_history(line);
-// 		free(line);
-// 	}
-// 	return (0);
-// }
-
-// ...existing code...
-static t_command	*build_test_pipeline(void)
+void	free_tokens(t_token *tokens)
 {
-    t_command	*cmd1;
-    t_command	*cmd2;
+	t_token	*tmp;
 
-	cmd1 = ft_calloc(1, sizeof(t_command));
-    cmd2 = ft_calloc(1, sizeof(t_command));
-    cmd1->args = ft_calloc(2, sizeof(char *));
-    cmd1->args[0] = ft_strdup("/bin/ls");
-    cmd1->next = cmd2;
-    cmd2->args = ft_calloc(3, sizeof(char *));
-    cmd2->args[0] = ft_strdup("/usr/bin/wc");
-    cmd2->args[1] = ft_strdup("-l");
-    return (cmd1);
+	while (tokens)
+	{
+		tmp = tokens->next;
+		free(tokens->value);
+		free(tokens);
+		tokens = tmp;
+	}
+}
+
+static void	free_commands(t_command *cmd)
+{
+	t_command	*tmp;
+	int			i;
+
+	while (cmd)
+	{
+		tmp = cmd->next;
+		i = 0;
+		while (cmd->args && cmd->args[i])
+		{
+			free(cmd->args[i]);
+			i++;
+		}
+		free(cmd->args);
+		free(cmd);
+		cmd = tmp;
+	}
+}
+
+static void	shell_loop(t_shell *shell, t_env *env)
+{
+	char		*line;
+	t_token		*tokens;
+	t_command	*cmd;
+
+	while (1)
+	{
+		line = readline("minishell$ ");
+		if (!line)
+		{
+			ft_putstr_fd("exit\n", STDOUT_FILENO);
+			break ;
+		}
+		if (*line)
+			add_history(line);
+		tokens = lexer(line, shell);
+		if (tokens)
+		{
+			cmd = parser(tokens);
+			if (cmd)
+			{
+				shell->exit_status = execute_command(cmd, env);
+				free_commands(cmd);
+			}
+			free_tokens(tokens);
+		}
+		free(line);
+	}
 }
 
 int	main(int ac, char **av, char **envp)
 {
-    t_shell		shell;
-    t_command	*cmd;
+	t_shell	shell;
+	t_env	*env;
 
-    (void)ac;
-    (void)av;
-    shell.envp = envp;
-    shell.exit_status = 0;
-    cmd = build_test_pipeline();
-    shell.exit_status = execute_command(cmd, NULL);
-    /* TODO: liberar cmd e args */
-    return (shell.exit_status);
+	(void)ac;
+	(void)av;
+	shell.envp = envp;
+	shell.exit_status = 0;
+	shell.tokens = NULL;
+	env = init_env(envp);
+	if (!env)
+	{
+		ft_putstr_fd("minishell: env init failed\n", STDERR_FILENO);
+		return (1);
+	}
+	setup_signals_interactive();
+	shell_loop(&shell, env);
+	return (shell.exit_status);
 }

@@ -6,12 +6,11 @@
 /*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 19:09:35 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/22 19:20:29 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/25 21:43:29 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 // monta "KEY=VALUE" (se value for NULL, usa só "KEY=")
 static char	*join_key_value(t_env *node)
@@ -30,7 +29,6 @@ static char	*join_key_value(t_env *node)
 		free(tmp);
 		return (result);
 	}
-	// sem valor, ficamos só com "KEY="
 	return (tmp);
 }
 

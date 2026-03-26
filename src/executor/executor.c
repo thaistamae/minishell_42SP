@@ -13,11 +13,13 @@
 #include "minishell.h"
 #include "executor.h"
 #include "redirections.h"
+#include "signal.h"
 
-static void exec_child_process(t_command *cmd, t_env *env, char *path)
+static void	exec_child_process(t_command *cmd, t_env *env, char *path)
 {
 	char	**envp;
 
+	setup_signals_child();
 	envp = env_to_array(env);
 	execve(path, cmd->args, envp);
 	perror("minishell: execve");

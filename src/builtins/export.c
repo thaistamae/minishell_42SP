@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 13:45:41 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/24 23:07:32 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/25 21:37:54 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static int	is_valid_identifier(char *s)
 {
 	int i;
+	
 	if (!s || !s[0] || ft_isalnum((unsigned char)s[0]))
 		return (0);
 	i = 0;

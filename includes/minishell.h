@@ -27,5 +27,6 @@
 # include "redirections.h"
 # include "structs.h"
 # include "builtins.h"
+# include "signal.h"
 
 #endif
