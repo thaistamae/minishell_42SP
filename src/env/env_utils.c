@@ -34,6 +34,7 @@ char	*get_env_value(t_env *env, const char *key)
 		return (NULL);
 	return (node->value);
 }
+
 //Helper estatico, cria nó na lista e faz malloc/erro
 static int	init_new_env_node(t_env **new, const char *key, const char *value)
 {
@@ -66,6 +67,7 @@ int	set_env_var(t_env **env, const char *key, const char *value)
 {
 	t_env	*node;
 	t_env	*new;
+	char	*new_value;
 
 	if (!env || !key)
 		return (1);
@@ -73,9 +75,13 @@ int	set_env_var(t_env **env, const char *key, const char *value)
 	if (node)
 	{
 		free(node->value);
-		node->value = value ? ft_strdup(value) : NULL;
-		if (value && !node->value)
+		if (value)
+			new_value = ft_strdup(value);
+		else
+			new_value = NULL;
+		if (value && !new_value)
 			return (1);
+		node->value = new_value;
 		return (0);
 	}
 	if (init_new_env_node(&new, key, value) != 0)

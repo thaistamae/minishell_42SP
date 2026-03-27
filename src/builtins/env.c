@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 11:01:01 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/25 21:37:23 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/26 23:53:05 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	builtin_env(t_env *env)
 {
 	t_env	*current;
-	
+
 	current = env;
-	while(current)
+	while (current)
 	{
 		if (current->value)
 		{

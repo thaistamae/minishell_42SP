@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 10:54:04 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/25 21:38:33 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/03/26 23:53:24 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	builtin_pwd(void)
 {
 	char	buffer[4096];
-	
+
 	if (!getcwd(buffer, sizeof(buffer)))
 	{
 		perror("minishell: pwd");
