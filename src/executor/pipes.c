@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "executor.h"
-#include "redirections.h"
 
 static void	exec_child_command(t_command *cmd, t_env *env)
 {

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "builtins.h"
 
 static int	is_valid_unset_identifier(char *s)
 {

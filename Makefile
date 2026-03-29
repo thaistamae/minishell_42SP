@@ -7,7 +7,6 @@ INC_DIR = includes
 READLINE = -lreadline
 
 SRCS = \
-	$(SRC_DIR)/debug.c \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/builtins/cd.c \
 	$(SRC_DIR)/builtins/echo.c \
@@ -29,9 +28,10 @@ SRCS = \
 	$(SRC_DIR)/lexer/tokens.c \
 	$(SRC_DIR)/lexer/handle_dollar.c \
 	$(SRC_DIR)/lexer/handle_word.c \
+	$(SRC_DIR)/lexer/validate_line.c \
 	$(SRC_DIR)/parser/parser.c \
 	$(SRC_DIR)/parser/parser_redir.c \
-	$(SRC_DIR)/parser/parser_utils.c \
+	$(SRC_DIR)/parser/parser_arg.c \
 	$(SRC_DIR)/parser/validate_syntax.c \
 	$(SRC_DIR)/signals/signals.c \
 	$(SRC_DIR)/utils/error.c \

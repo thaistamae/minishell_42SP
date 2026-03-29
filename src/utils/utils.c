@@ -59,6 +59,19 @@ static int	fill_env_array(t_env *env, char **envp)
 	return (0);
 }
 
+static	int	env_size(t_env *env)
+{
+	int	size;
+
+	size = 0;
+	while (env)
+	{
+		size++;
+		env = env->next;
+	}
+	return (size);
+}
+
 // converte lista t_env* em char ** para execve
 char	**env_to_array(t_env *env)
 {

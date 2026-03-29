@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <signal.h>
 
 // handler para SIGINT no shell interativo (Ctrl+C)
 static void	handle_sigint(int sig)

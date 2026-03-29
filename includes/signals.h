@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNAL_H
-# define SIGNAL_H
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
 // configura sinais para o shell interativo
 void	setup_signals_interactive(void);

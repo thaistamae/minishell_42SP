@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "executor.h"
-#include "redirections.h"
-#include "signal.h"
 
 static void	exec_child_process(t_command *cmd, t_env *env, char *path)
 {

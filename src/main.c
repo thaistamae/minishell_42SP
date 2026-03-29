@@ -11,48 +11,37 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "executor.h"
-#include "structs.h"
-#include "signal.h"
 
-void	free_tokens(t_token *tokens)
+static int	handle_syntax_error(t_shell *shell, char *line)
 {
-	t_token	*tmp;
-
-	while (tokens)
-	{
-		tmp = tokens->next;
-		free(tokens->value);
-		free(tokens);
-		tokens = tmp;
-	}
+	printf("minishell: syntax error\n");
+	shell->exit_status = 2;
+	free(line);
+	return (1);
 }
 
-static void	free_commands(t_command *cmd)
+static void	process_command(t_shell *shell, t_env *env, t_token *tokens)
 {
-	t_command	*tmp;
-	int			i;
+	t_command	*cmd;
 
-	while (cmd)
+	if (!validate_syntax(tokens))
 	{
-		tmp = cmd->next;
-		i = 0;
-		while (cmd->args && cmd->args[i])
-		{
-			free(cmd->args[i]);
-			i++;
-		}
-		free(cmd->args);
-		free(cmd);
-		cmd = tmp;
+		printf("minishell: syntax error\n");
+		shell->exit_status = 2;
+		return ;
+	}
+	cmd = parser(tokens);
+	if (cmd)
+	{
+		shell->exit_status = execute_command(cmd, env);
+		free_commands(cmd);
 	}
 }
 
 static void	shell_loop(t_shell *shell, t_env *env)
 {
-	char		*line;
-	t_token		*tokens;
-	t_command	*cmd;
+	char	*line;
+	t_token	*tokens;
 
 	while (1)
 	{
@@ -64,17 +53,15 @@ static void	shell_loop(t_shell *shell, t_env *env)
 		}
 		if (*line)
 			add_history(line);
+		if (has_invalid_chars(line) || has_unclosed_quotes(line))
+			if (handle_syntax_error(shell, line))
+				continue ;
 		tokens = lexer(line, shell);
-		if (tokens)
-		{
-			cmd = parser(tokens);
-			if (cmd)
-			{
-				shell->exit_status = execute_command(cmd, env);
-				free_commands(cmd);
-			}
-			free_tokens(tokens);
-		}
+		if (!tokens)
+			if (handle_syntax_error(shell, line))
+				continue ;
+		process_command(shell, env, tokens);
+		free_tokens(tokens);
 		free(line);
 	}
 }

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
 
 //Inclui os tokens de | na lista linkada
 static void	handle_pipe(t_token **list, int *i)
@@ -73,7 +72,13 @@ t_token	*lexer(char *line, t_shell *shell)
 		else if (line[i] == '>' || line[i] == '<')
 			handle_redirection(&list, line, &i);
 		else
-			handle_word(line, &i, &list, shell);
+		{
+			if (!handle_word(line, &i, &list, shell))
+			{
+				free_tokens(list);
+				return (NULL);
+			}
+		}
 	}
 	return (list);
 }

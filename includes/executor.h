@@ -29,7 +29,6 @@ int		builtin_exit(t_command *cmd);
 
 char	*find_executable(char *cmd, t_env *env);
 char	**env_to_array(t_env *env);
-char	*get_env_value(char *key, t_env *env);
 
 int		error_command_not_found(char *cmd);
 int		error_fork(void);
