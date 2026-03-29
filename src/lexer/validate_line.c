@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   validate_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ttamae <ttamae@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 14:39:22 by ttamae            #+#    #+#             */
 /*   Updated: 2026/03/22 14:39:24 by ttamae           ###   ########.fr       */
