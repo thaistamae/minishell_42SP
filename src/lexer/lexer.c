@@ -72,7 +72,14 @@ t_token	*lexer(char *line, t_shell *shell)
 		else if (line[i] == '>' || line[i] == '<')
 			handle_redirection(&list, line, &i);
 		else
-			handle_word(line, &i, &list, shell);
+		{
+			if (!handle_word(line, &i, &list, shell))
+			{
+				free_tokens(list);
+				printf("minishell: syntax error: unclosed quotes\n");
+				return (NULL);
+			}
+		}
 	}
 	return (list);
 }

@@ -40,8 +40,7 @@ static int	handle_quotes(char *line, int *i, t_builder *b, t_shell *shell)
 //Constrói uma palavra lendo os caracteres da linha de comando
 //Adiciona os caracteres ao buffer até encontrar espaço ou operador
 //Também trata aspas e expansão de variáveis
-static int	build_word(char *line, int *i,
-						t_builder *b, t_shell *shell)
+static int	build_word(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	while (line[*i] && !ft_isspace(line[*i])
 		&& line[*i] != '|'
@@ -90,8 +89,7 @@ void	append_char(char **buffer, int *len, int *cap, char c)
 
 //Cria um token do tipo WORD a partir do conteúdo construído no buffer
 //Chama build_word para ler a palavra e adiciona o token na lista
-void	handle_word(char *line, int *i,
-					t_token **list, t_shell *shell)
+int	handle_word(char *line, int *i, t_token **list, t_shell *shell)
 {
 	t_builder	b;
 	t_token		*new;
@@ -100,18 +98,19 @@ void	handle_word(char *line, int *i,
 	b.cap = 32;
 	b.buffer = malloc(b.cap);
 	if (!b.buffer)
-		return ;
+		return (0);
 	if (!build_word(line, i, &b, shell))
 	{
 		free(b.buffer);
-		return ;
+		return (0);
 	}
 	b.buffer[b.len] = '\0';
 	new = new_token(b.buffer, T_WORD);
 	if (!new)
 	{
 		free(b.buffer);
-		return ;
+		return (0);
 	}
 	add_token_back(list, new);
+	return (1);
 }

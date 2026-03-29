@@ -63,8 +63,7 @@ static int	handle_exit_status(char *line, int *i, t_builder *b, t_shell *shell)
 
 //Lê o nome de uma variável de ambiente após o '$'
 //Busca seu valor no envp e adiciona ao buffer
-static void	handle_env_var(char *line, int *i,
-							t_builder *b, t_shell *shell)
+static void	handle_env_var(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	int		start;
 	char	*var;
@@ -84,8 +83,7 @@ static void	handle_env_var(char *line, int *i,
 
 //Lida com a expansão de variáveis iniciadas por '$'
 //Pode expandir $?, variáveis de ambiente ou tratar '$' literal
-void	handle_dollar(char *line, int *i,
-					t_builder *b, t_shell *shell)
+void	handle_dollar(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	(*i)++;
 	if (handle_exit_status(line, i, b, shell))

@@ -24,7 +24,7 @@ void	free_tokens(t_token *list);
 void	append_char(char **buffer, int *len, int *cap, char c);
 
 t_token	*lexer(char *line, t_shell *shell);
-void	handle_word(char *line, int *i, t_token **list, t_shell *shell);
+int		handle_word(char *line, int *i, t_token **list, t_shell *shell);
 void	handle_dollar(char *line, int *i, t_builder *b, t_shell *shell);
 
 //teste
