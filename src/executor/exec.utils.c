@@ -12,7 +12,37 @@
 
 #include "minishell.h"
 
-char	*get_env_value(char *key, t_env *env)
+// Duplica strings e cria um array a partir do ambiente
+static char	*resolve_slash_command(char *cmd)
+{
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
+	return (NULL);
+}
+
+// Procura o comando em cada diretório do PATH e retorna o caminho completo
+static char	*find_in_path_dirs(char **dirs, char *cmd)
+{
+	int		i;
+	char	*temp;
+	char	*full_path;
+
+	i = 0;
+	while (dirs[i])
+	{
+		temp = ft_strjoin(dirs[i], "/");
+		full_path = ft_strjoin(temp, cmd);
+		free(temp);
+		if (access(full_path, X_OK) == 0)
+			return (full_path);
+		free(full_path);
+		i++;
+	}
+	return (NULL);
+}
+
+// Busca o valor de uma variável de ambiente pelo nome
+static char	*get_env_value(char *key, t_env *env)
 {
 	t_env	*current;
 
@@ -28,45 +58,27 @@ char	*get_env_value(char *key, t_env *env)
 	return (NULL);
 }
 
+// 
 char	*find_executable(char *cmd, t_env *env)
 {
-	int		i;
 	char	**dirs;
-	char	*full_path;
 	char	*path_value;
-	char	*temp;
+	char	*path_cmd;
 
 	if (ft_strchr(cmd, '/') != NULL)
-	{
-		if (access(cmd, X_OK) == 0)
-			return (ft_strdup(cmd));
-		else
-			return (NULL);
-	}
+		return (resolve_slash_command(cmd));
 	path_value = get_env_value("PATH", env);
 	if (!path_value)
 		return (NULL);
 	dirs = ft_split(path_value, ':');
 	if (!dirs)
 		return (NULL);
-	i = 0;
-	while (dirs[i])
-	{
-		temp = ft_strjoin(dirs[i], "/");
-		full_path = ft_strjoin(temp, cmd);
-		free(temp);
-		if (access(full_path, X_OK) == 0)
-		{
-			free_array(dirs);
-			return (full_path);
-		}
-		free(full_path);
-		i++;
-	}
+	path_cmd = find_in_path_dirs(dirs, cmd);
 	free_array(dirs);
-	return (NULL);
+	return (path_cmd);
 }
 
+// Verifica se o comando é um built-in
 int	is_builtin(char *cmd)
 {
 	if (!cmd)

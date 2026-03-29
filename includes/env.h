@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ttamae <ttamae@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/22 10:54:04 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/26 23:53:24 by kaidda-s         ###   ########.fr       */
+/*   Created: 2026/03/29 16:33:50 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/29 16:33:53 by ttamae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef ENV_H
+# define ENV_H
+# include "structs.h"
 
-int	builtin_pwd(void)
-{
-	char	buffer[4096];
+t_env	*init_env(char **envp);
+int		set_env_var(t_env **env, const char *key, const char *value);
+int		unset_env_var(t_env **env, const char *key);
 
-	if (!getcwd(buffer, sizeof(buffer)))
-	{
-		perror("minishell: pwd");
-		return (1);
-	}
-	ft_putstr_fd(buffer, STDOUT_FILENO);
-	return (0);
-}
+#endif

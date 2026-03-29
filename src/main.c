@@ -12,42 +12,77 @@
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+static int	handle_syntax_error(t_shell *shell, char *line)
 {
-	char		*line;
-	t_token		*tokens;
-	t_shell		shell;
-	t_command	*cmds;
+	printf("minishell: syntax error\n");
+	shell->exit_status = 2;
+	free(line);
+	return (1);
+}
 
-	(void)argc;
-	(void)argv;
-	shell.envp = envp;
-	shell.exit_status = 0;
+static void	process_command(t_shell *shell, t_env *env, t_token *tokens)
+{
+	t_command	*cmd;
+
+	if (!validate_syntax(tokens))
+	{
+		printf("minishell: syntax error\n");
+		shell->exit_status = 2;
+		return ;
+	}
+	cmd = parser(tokens);
+	if (cmd)
+	{
+		shell->exit_status = execute_command(cmd, env);
+		free_commands(cmd);
+	}
+}
+
+static void	shell_loop(t_shell *shell, t_env *env)
+{
+	char	*line;
+	t_token	*tokens;
+
 	while (1)
 	{
 		line = readline("minishell$ ");
 		if (!line)
+		{
+			ft_putstr_fd("exit\n", STDOUT_FILENO);
 			break ;
+		}
 		if (*line)
 			add_history(line);
 		if (has_invalid_chars(line) || has_unclosed_quotes(line))
-		{
-			printf("minishell: syntax error\n");
-			free(line);
-			continue ;
-		}
-		tokens = lexer(line, &shell);
-		print_tokens(tokens);
-		if (!validate_syntax(tokens))
-			printf("minishell: sintax error \n");
-		else
-		{
-			cmds = parse_commands(tokens);
-			print_commands(cmds);
-		}		
+			if (handle_syntax_error(shell, line))
+				continue ;
+		tokens = lexer(line, shell);
+		if (!tokens)
+			if (handle_syntax_error(shell, line))
+				continue ;
+		process_command(shell, env, tokens);
 		free_tokens(tokens);
-		free_commands(cmds);
 		free(line);
 	}
-	return (0);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_shell	shell;
+	t_env	*env;
+
+	(void)ac;
+	(void)av;
+	shell.envp = envp;
+	shell.exit_status = 0;
+	shell.tokens = NULL;
+	env = init_env(envp);
+	if (!env)
+	{
+		ft_putstr_fd("minishell: env init failed\n", STDERR_FILENO);
+		return (1);
+	}
+	setup_signals_interactive();
+	shell_loop(&shell, env);
+	return (shell.exit_status);
 }

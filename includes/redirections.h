@@ -12,8 +12,7 @@
 
 #ifndef REDIRECTIONS_H
 # define REDIRECTIONS_H
-
-#include "structs.h"
+# include "structs.h"
 
 // Funções principais
 int		apply_redirections(t_command *cmd);

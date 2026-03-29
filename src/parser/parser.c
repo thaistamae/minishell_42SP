@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ttamae <ttamae@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/22 13:36:09 by ttamae            #+#    #+#             */
-/*   Updated: 2026/03/22 13:36:18 by ttamae           ###   ########.fr       */
+/*   Created: 2026/03/29 12:01:56 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/29 12:01:56 by ttamae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	free_redirs(t_redir *redir)
 
 //vai percorrer os tokens e montar a lista linkada com os comandos 
 //os comandos são separados em listas de argumentos e lista de redirects
-t_command	*parse_commands(t_token *tokens)
+t_command	*parser(t_token *tokens)
 {
 	t_command	*head;
 	t_command	*current;

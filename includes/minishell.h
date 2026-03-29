@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -26,5 +27,8 @@
 # include "parser.h"
 # include "redirections.h"
 # include "structs.h"
+# include "builtins.h"
+# include "signals.h"
+# include "env.h"
 
 #endif

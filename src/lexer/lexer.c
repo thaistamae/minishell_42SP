@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttamae <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ttamae <ttamae@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/22 13:38:44 by ttamae            #+#    #+#             */
-/*   Updated: 2026/03/22 13:38:46 by ttamae           ###   ########.fr       */
+/*   Created: 2026/03/29 12:04:07 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/29 12:04:07 by ttamae           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ t_token	*lexer(char *line, t_shell *shell)
 	t_token	*list;
 	int		i;
 
-	list = NULL;
 	i = 0;
+	list = NULL;
 	while (line[i])
 	{
 		if (ft_isspace(line[i]))
@@ -76,7 +76,6 @@ t_token	*lexer(char *line, t_shell *shell)
 			if (!handle_word(line, &i, &list, shell))
 			{
 				free_tokens(list);
-				printf("minishell: syntax error: unclosed quotes\n");
 				return (NULL);
 			}
 		}
