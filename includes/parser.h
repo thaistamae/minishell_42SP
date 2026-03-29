@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <ttamae@student.42sp.org.br>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/29 11:59:08 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/29 11:59:08 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
-
-#include "structs.h"
+# include "structs.h"
 
 int			validate_syntax(t_token *tokens);
 t_command	*parse_commands(t_token *tokens);

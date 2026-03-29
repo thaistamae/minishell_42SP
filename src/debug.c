@@ -1,3 +1,4 @@
+/*
 #include "minishell.h"
 
 //Método apenas para testes
@@ -36,4 +37,4 @@ void	print_commands(t_command *cmd)
 		cmd = cmd->next;
 	}
 }
-
+*/

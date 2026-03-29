@@ -12,7 +12,6 @@
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
-
 # include "structs.h"
 
 int		execute_command(t_command *cmd, t_env *env);

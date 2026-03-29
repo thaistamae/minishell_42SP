@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_dollar.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <ttamae@student.42sp.org.br>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/29 12:03:39 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/29 12:03:39 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "libft.h"
 
@@ -35,7 +47,7 @@ static void	append_str(t_builder *b, char *str)
 
 //Lida com a expansão da variável especial $?
 //Adiciona o exit_status atual do shell ao buffer
-static int	handle_exit_status(char *line, int *i, 
+static int	handle_exit_status(char *line, int *i,
 								t_builder *b, t_shell *shell)
 {
 	char	*status;

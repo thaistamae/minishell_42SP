@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttamae <ttamae@student.42sp.org.br>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/29 11:58:32 by ttamae            #+#    #+#             */
+/*   Updated: 2026/03/29 11:58:32 by ttamae           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -30,13 +42,13 @@ typedef struct s_redir
 	t_token_type	type;
 	char			*file;
 	struct s_redir	*next;
-}   t_redir;
+}	t_redir;
 
-typedef	struct s_command
+typedef struct s_command
 {
 	char				**args;
 	t_redir				*redirs;
-	struct	s_command	*next; 
+	struct s_command	*next;
 }	t_command;
 
 typedef struct s_builder
