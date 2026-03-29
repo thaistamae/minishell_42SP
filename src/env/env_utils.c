@@ -25,15 +25,15 @@ t_env	*get_env_node(t_env *env, const char *key)
 }
 
 //Procura o nó
-//char	*get_env_value(t_env *env, const char *key)
-//{
-//	t_env	*node;
-//
-//	node = get_env_node(env, key);
-//	if (!node)
-//		return (NULL);
-//	return (node->value);
-//}
+char	*get_env_value(t_env *env, const char *key)
+{
+	t_env	*node;
+
+	node = get_env_node(env, key);
+	if (!node)
+		return (NULL);
+	return (node->value);
+}
 
 //Helper estatico, cria nó na lista e faz malloc/erro
 static int	init_new_env_node(t_env **new, const char *key, const char *value)

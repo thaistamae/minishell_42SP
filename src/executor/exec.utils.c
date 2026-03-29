@@ -41,23 +41,6 @@ static char	*find_in_path_dirs(char **dirs, char *cmd)
 	return (NULL);
 }
 
-// Busca o valor de uma variável de ambiente pelo nome
-static char	*get_env_value(char *key, t_env *env)
-{
-	t_env	*current;
-
-	if (!key || !env)
-		return (NULL);
-	current = env;
-	while (current)
-	{
-		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
-			return (current->value);
-		current = current->next;
-	}
-	return (NULL);
-}
-
 // 
 char	*find_executable(char *cmd, t_env *env)
 {
@@ -67,7 +50,7 @@ char	*find_executable(char *cmd, t_env *env)
 
 	if (ft_strchr(cmd, '/') != NULL)
 		return (resolve_slash_command(cmd));
-	path_value = get_env_value("PATH", env);
+	path_value = get_env_value(env, "PATH");
 	if (!path_value)
 		return (NULL);
 	dirs = ft_split(path_value, ':');

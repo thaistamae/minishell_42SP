@@ -17,5 +17,6 @@
 t_env	*init_env(char **envp);
 int		set_env_var(t_env **env, const char *key, const char *value);
 int		unset_env_var(t_env **env, const char *key);
+char	*get_env_value(t_env *env, const char *key);
 
 #endif
