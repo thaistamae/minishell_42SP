@@ -20,7 +20,7 @@ static int	handle_syntax_error(t_shell *shell, char *line)
 	return (1);
 }
 
-static void	process_command(t_shell *shell, t_env *env, t_token *tokens)
+static void	process_command(t_shell *shell, t_token *tokens)
 {
 	t_command	*cmd;
 
@@ -33,12 +33,12 @@ static void	process_command(t_shell *shell, t_env *env, t_token *tokens)
 	cmd = parser(tokens);
 	if (cmd)
 	{
-		shell->exit_status = execute_command(cmd, env);
+		shell->exit_status = execute_command(cmd, shell->env);
 		free_commands(cmd);
 	}
 }
 
-static void	shell_loop(t_shell *shell, t_env *env)
+static void	shell_loop(t_shell *shell)
 {
 	char	*line;
 	t_token	*tokens;
@@ -51,6 +51,11 @@ static void	shell_loop(t_shell *shell, t_env *env)
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
 			break ;
 		}
+		if (only_spaces(line))
+		{
+			free(line);
+			continue;
+		}
 		if (*line)
 			add_history(line);
 		if (has_invalid_chars(line) || has_unclosed_quotes(line))
@@ -60,7 +65,7 @@ static void	shell_loop(t_shell *shell, t_env *env)
 		if (!tokens)
 			if (handle_syntax_error(shell, line))
 				continue ;
-		process_command(shell, env, tokens);
+		process_command(shell, tokens);
 		free_tokens(tokens);
 		free(line);
 	}
@@ -77,12 +82,13 @@ int	main(int ac, char **av, char **envp)
 	shell.exit_status = 0;
 	shell.tokens = NULL;
 	env = init_env(envp);
+	shell.env = env;
 	if (!env)
 	{
 		ft_putstr_fd("minishell: env init failed\n", STDERR_FILENO);
 		return (1);
 	}
 	setup_signals_interactive();
-	shell_loop(&shell, env);
+	shell_loop(&shell);
 	return (shell.exit_status);
 }

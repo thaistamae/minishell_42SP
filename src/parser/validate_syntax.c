@@ -67,3 +67,17 @@ int	validate_syntax(t_token *tokens)
 	}
 	return (1);
 }
+
+int	only_spaces(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isspace(line[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}

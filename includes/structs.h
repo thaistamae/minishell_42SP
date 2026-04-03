@@ -61,6 +61,7 @@ typedef struct s_builder
 typedef struct s_shell
 {
 	char	**envp;
+	t_env	*env;
 	int		exit_status;
 	t_token	*tokens;
 }	t_shell;

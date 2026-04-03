@@ -15,6 +15,7 @@
 # include "structs.h"
 
 int			validate_syntax(t_token *tokens);
+int			only_spaces(char *line);
 t_command	*parser(t_token *tokens);
 void		free_commands(t_command *cmd);
 t_command	*new_command(void);
