@@ -70,7 +70,7 @@ int	validate_syntax(t_token *tokens)
 
 int	only_spaces(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])

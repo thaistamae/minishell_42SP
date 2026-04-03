@@ -14,9 +14,9 @@
 
 static int	handle_syntax_error(t_shell *shell, char *line)
 {
+	(void)line;
 	printf("minishell: syntax error\n");
 	shell->exit_status = 2;
-	free(line);
 	return (1);
 }
 
@@ -38,10 +38,33 @@ static void	process_command(t_shell *shell, t_token *tokens)
 	}
 }
 
+static int	process_line(t_shell *shell, char *line)
+{
+	t_token	*tokens;
+
+	if (only_spaces(line))
+		return (0);
+	if (*line)
+		add_history(line);
+	if (has_invalid_chars(line) || has_unclosed_quotes(line))
+	{
+		handle_syntax_error(shell, line);
+		return (0);
+	}
+	tokens = lexer(line, shell);
+	if (!tokens)
+	{
+		handle_syntax_error(shell, line);
+		return (0);
+	}
+	process_command(shell, tokens);
+	free_tokens(tokens);
+	return (0);
+}
+
 static void	shell_loop(t_shell *shell)
 {
 	char	*line;
-	t_token	*tokens;
 
 	while (1)
 	{
@@ -51,22 +74,7 @@ static void	shell_loop(t_shell *shell)
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
 			break ;
 		}
-		if (only_spaces(line))
-		{
-			free(line);
-			continue;
-		}
-		if (*line)
-			add_history(line);
-		if (has_invalid_chars(line) || has_unclosed_quotes(line))
-			if (handle_syntax_error(shell, line))
-				continue ;
-		tokens = lexer(line, shell);
-		if (!tokens)
-			if (handle_syntax_error(shell, line))
-				continue ;
-		process_command(shell, tokens);
-		free_tokens(tokens);
+		process_line(shell, line);
 		free(line);
 	}
 }
