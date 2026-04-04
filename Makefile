@@ -3,6 +3,9 @@ NAME = minishell
 SRC_DIR = src
 LIBFT_DIR = libft
 INC_DIR = includes
+BUILD_DIR = build
+OBJ_DIR = $(BUILD_DIR)/obj
+DEP_DIR = $(BUILD_DIR)/dep
 
 READLINE = -lreadline
 
@@ -37,10 +40,10 @@ SRCS = \
 	$(SRC_DIR)/utils/error.c \
 	$(SRC_DIR)/utils/free.c \
 	$(SRC_DIR)/utils/utils.c \
+	$(SRC_DIR)/utils/builtin_utils.c \
 	$(SRC_DIR)/executor/pipes_utils.c
 
-
-OBJS = $(SRCS:.c=.o)
+OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -56,11 +59,12 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(BUILD_DIR)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
