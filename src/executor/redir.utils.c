@@ -28,21 +28,6 @@ int	save_std_fds(int *saved_stdin, int *saved_stdout)
 	return (0);
 }
 
-// Volta stdout/stdin aos valores originais
-void	restore_std_fds(int saved_stdin, int saved_stdout)
-{
-	if (saved_stdin != -1)
-	{
-		dup2(saved_stdin, STDIN_FILENO);
-		close(saved_stdin);
-	}
-	if (saved_stdout != -1)
-	{
-		dup2(saved_stdout, STDOUT_FILENO);
-		close(saved_stdout);
-	}
-}
-
 // Abri arquivo para escrita (output)
 int	open_output_file(t_redir *redir)
 {

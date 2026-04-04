@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 21:34:20 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/18 22:41:17 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/04 13:00:16 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,20 @@ int	wait_children(pid_t *pids, int n)
 		i++;
 	}
 	return (last);
+}
+
+bool	has_pipe(t_command *cmd)
+{
+	int	i;
+
+	if (!cmd || !cmd->args)
+		return (false);
+	i = 0;
+	while (cmd->args[i])
+	{
+		if (ft_strcmp(cmd->args[i], "|") == 0)
+			return (true);
+		i++;
+	}
+	return (false);
 }

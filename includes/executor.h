@@ -42,5 +42,10 @@ pid_t	*alloc_pids(int n);
 void	safe_close(int fd);
 int		wait_children(pid_t *pids, int n);
 void	setup_child_fds(int prev_fd, int pipe_write);
+bool	has_pipe(t_command *cmd);
 
+// Funções de builtin utils
+int		run_builtin(t_command *cmd, t_env *env);
+int		save_std_fds(int *saved_stdin, int *saved_stdout);
+void	restore_std_fds(int saved_stdin, int saved_stdout);
 #endif

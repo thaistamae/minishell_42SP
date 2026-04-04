@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 23:07:54 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/25 21:38:41 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/04 12:08:11 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	builtin_unset(t_command *cmd, t_env *env)
 	int	i;
 	int	ret;
 
-	if (!cmd || !cmd->args)
+	if (!cmd || !cmd->args || !cmd->args[0])
 		return (1);
 	i = 1;
 	ret = 0;
