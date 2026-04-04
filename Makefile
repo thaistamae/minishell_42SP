@@ -25,8 +25,6 @@ SRCS = \
 	$(SRC_DIR)/executor/pipes.c \
 	$(SRC_DIR)/executor/redirections.c \
 	$(SRC_DIR)/executor/redir.utils.c \
-	$(SRC_DIR)/expander/expander.c \
-	$(SRC_DIR)/expander/quotes.c \
 	$(SRC_DIR)/lexer/lexer.c \
 	$(SRC_DIR)/lexer/tokens.c \
 	$(SRC_DIR)/lexer/handle_dollar.c \

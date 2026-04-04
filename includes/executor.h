@@ -19,14 +19,6 @@ int		execute_external(t_command *cmd, t_env *env);
 int		is_builtin(char *cmd);
 int		execute_builtin(t_command *cmd, t_env *env);
 
-int		builtin_echo(t_command *cmd);
-int		builtin_cd(t_command *cmd, t_env *env);
-int		builtin_pwd(void);
-int		builtin_export(t_command *cmd, t_env *env);
-int		builtin_unset(t_command *cmd, t_env *env);
-int		builtin_env(t_env *env);
-int		builtin_exit(t_command *cmd);
-
 char	*find_executable(char *cmd, t_env *env);
 char	**env_to_array(t_env *env);
 

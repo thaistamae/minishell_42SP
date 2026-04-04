@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <errno.h>
 # include "../libft/libft.h"
 # include "executor.h"
 # include "lexer.h"
@@ -31,5 +32,7 @@
 # include "builtins.h"
 # include "signals.h"
 # include "env.h"
+
+extern int	g_signal;
 
 #endif

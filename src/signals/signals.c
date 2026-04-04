@@ -12,20 +12,14 @@
 
 #include "minishell.h"
 
+int	g_signal = 0;
+
 // handler para SIGINT no shell interativo (Ctrl+C)
 static void	handle_sigint(int sig)
 {
 	(void)sig;
+	g_signal = 128 + SIGINT;
 	ft_putstr_fd("\n", STDOUT_FILENO);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-// handler para SIGQUIT no shell interativo (Ctrl+\\)
-static void	handle_sigquit(int sig)
-{
-	(void)sig;
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -35,7 +29,7 @@ static void	handle_sigquit(int sig)
 void	setup_signals_interactive(void)
 {
 	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTERM, SIG_IGN);
 	signal(SIGPIPE, SIG_IGN);
 }

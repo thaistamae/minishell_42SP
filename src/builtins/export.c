@@ -16,7 +16,7 @@ static int	is_valid_identifier(char *s)
 {
 	int	i;
 
-	if (!s || !s[0] || ft_isalnum((unsigned char)s[0]))
+	if (!s || !s[0] || (!ft_isalpha((unsigned char)s[0]) && s[0] != '_'))
 		return (0);
 	i = 0;
 	while (s[i] && s[i] != '=')
@@ -32,13 +32,13 @@ static int	print_export(t_env *env)
 {
 	while (env)
 	{
-		ft_putstr_fd("declare -x", STDOUT_FILENO);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		ft_putstr_fd(env->key, STDOUT_FILENO);
 		if (env->value)
 		{
 			ft_putstr_fd("=\"", STDOUT_FILENO);
 			ft_putstr_fd(env->value, STDOUT_FILENO);
-			ft_putstr_fd("=\"", STDOUT_FILENO);
+			ft_putstr_fd("\"", STDOUT_FILENO);
 		}
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		env = env->next;
