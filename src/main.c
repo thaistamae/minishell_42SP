@@ -12,9 +12,8 @@
 
 #include "minishell.h"
 
-static int	handle_syntax_error(t_shell *shell, char *line)
+static int	handle_syntax_error(t_shell *shell)
 {
-	(void)line;
 	printf("minishell: syntax error\n");
 	shell->exit_status = 2;
 	return (1);
@@ -48,13 +47,13 @@ static int	process_line(t_shell *shell, char *line)
 		add_history(line);
 	if (has_invalid_chars(line) || has_unclosed_quotes(line))
 	{
-		handle_syntax_error(shell, line);
+		handle_syntax_error(shell);
 		return (0);
 	}
 	tokens = lexer(line, shell);
 	if (!tokens)
 	{
-		handle_syntax_error(shell, line);
+		handle_syntax_error(shell);
 		return (0);
 	}
 	process_command(shell, tokens);
