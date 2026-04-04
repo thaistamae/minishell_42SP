@@ -47,6 +47,8 @@ t_command	*parser(t_token *tokens)
 		{
 			current->next = new_command();
 			current = current->next;
+			tokens = tokens->next;
+			continue;
 		}
 		tokens = tokens->next;
 	}
