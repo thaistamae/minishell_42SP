@@ -12,25 +12,6 @@
 
 #include "minishell.h"
 
-//Busca o valor de uma variável de ambiente no envp
-//Retorna apenas a parte após o '='
-static char	*get_env_value_from_envp(char *var, char **envp)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = ft_strlen(var);
-	while (envp[i])
-	{
-		if (!ft_strncmp(envp[i], var, len)
-			&& envp[i][len] == '=')
-			return (envp[i] + len + 1);
-		i++;
-	}
-	return (NULL);
-}
-
 //Adiciona uma string inteira ao buffer do builder
 static void	append_str(t_builder *b, char *str)
 {
@@ -75,7 +56,7 @@ static void	handle_env_var(char *line, int *i, t_builder *b, t_shell *shell)
 	var = ft_substr(line, start, *i - start);
 	if (!var)
 		return ;
-	value = get_env_value_from_envp(var, shell->envp);
+	value = get_env_value(shell->env, var);
 	if (value)
 		append_str(b, value);
 	free(var);
