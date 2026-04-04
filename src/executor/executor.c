@@ -21,7 +21,12 @@ static void	exec_child_process(t_command *cmd, t_env *env, char *path)
 	execve(path, cmd->args, envp);
 	perror("minishell: execve");
 	free_array(envp);
-	exit(1);
+	if (errno == ENOENT)
+		exit(127);
+	else if (errno == EACCES || errno == ENOEXEC || errno == EISDIR)
+		exit(126);
+	else
+		exit(1);
 }
 
 //Função para comandos externos ex.: ls, mv, rm, mkdir...

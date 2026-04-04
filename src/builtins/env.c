@@ -22,8 +22,9 @@ int	builtin_env(t_env *env)
 		if (current->value)
 		{
 			ft_putstr_fd(current->key, STDOUT_FILENO);
-			ft_putstr_fd("=", STDERR_FILENO);
-			ft_putstr_fd(current->value, STDIN_FILENO);
+			ft_putstr_fd("=", STDOUT_FILENO);
+			ft_putstr_fd(current->value, STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
 		}
 		current = current->next;
 	}

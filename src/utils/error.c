@@ -20,7 +20,7 @@ int	error_command_not_found(char *args)
 		ft_putstr_fd(args, STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	}
-	return (1);
+	return (127);
 }
 
 int	error_fork(void)
