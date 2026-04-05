@@ -23,6 +23,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
+# include <sys/stat.h>
 # include "../libft/libft.h"
 # include "executor.h"
 # include "lexer.h"

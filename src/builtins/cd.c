@@ -12,17 +12,8 @@
 
 #include "minishell.h"
 
-int	builtin_cd(t_command *cmd, t_env *env)
+static int	change_dir(char *target)
 {
-	char	*target;
-
-	(void)env;
-	if (!cmd->args[1])
-	{
-		ft_putstr_fd("minishel: cd: HOME not set", STDERR_FILENO);
-		return (1);
-	}
-	target = cmd->args[1];
 	if (chdir(target) == -1)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
@@ -31,4 +22,28 @@ int	builtin_cd(t_command *cmd, t_env *env)
 		return (1);
 	}
 	return (0);
+}
+
+int	builtin_cd(t_command *cmd, t_env *env)
+{
+	char	*target;
+
+	(void)env;
+	if (!cmd->args[1])
+	{
+		target = getenv("HOME");
+		if (!target)
+		{
+			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
+			return (1);
+		}
+		return (change_dir(target));
+	}
+	if (cmd->args[2])
+	{
+		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
+		return (1);
+	}
+	target = cmd->args[1];
+	return (change_dir(target));
 }
