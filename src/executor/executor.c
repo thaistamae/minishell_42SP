@@ -12,34 +12,6 @@
 
 #include "minishell.h"
 
-static int	resolve_command_path(char **path, char **args)
-{
-	if (!*path)
-	{
-		if ((*args)[0] == '/' || ft_strncmp(*args, "./", 2) == 0
-			|| ft_strncmp(*args, "../", 3) == 0)
-		{
-			if (access(*args, F_OK) != 0)
-				return (path_not_found(*args));
-			*path = ft_strdup(*args);
-		}
-		else
-			return (path_not_found(*args));
-	}
-	if (is_directory(*path) || access(*path, X_OK) != 0)
-	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(*args, STDERR_FILENO);
-		if (is_directory(*path))
-			ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
-		else
-			ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
-		free(*path);
-		return (126);
-	}
-	return (0);
-}
-
 static void	exec_child_process(t_command *cmd, t_env *env,
 			char *path, char **args)
 {
@@ -55,25 +27,19 @@ static void	exec_child_process(t_command *cmd, t_env *env,
 	exit(1);
 }
 
+/* Função principal que mantém todo o fork e wait */
 int	execute_external(t_command *cmd, t_env *env)
 {
 	pid_t	pid;
 	int		status;
 	char	*path;
-	int		i;
 	char	**args_valid;
 	int		check;
 
-	if (!cmd || !cmd->args || !cmd->args[0])
-		return (1);
-	i = 0;
-	while (cmd->args[i] && cmd->args[i][0] == '\0')
-		i++;
-	if (!cmd->args[i])
-		return (0);
-	args_valid = &cmd->args[i];
-	path = find_executable(args_valid[0], env);
-	check = resolve_command_path(&path, args_valid);
+	check = external_setup_args(cmd, &args_valid);
+	if (check != -1)
+		return (check);
+	check = external_prepare_path(&path, args_valid, env);
 	if (check != 0)
 		return (check);
 	pid = fork();
