@@ -28,3 +28,11 @@ int	error_fork(void)
 	ft_putstr_fd("minishell: fork error\n", STDERR_FILENO);
 	return (1);
 }
+
+int	path_not_found(char *arg)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	return (127);
+}

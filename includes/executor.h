@@ -17,13 +17,17 @@
 int		execute_command(t_command *cmd, t_env *env);
 int		execute_external(t_command *cmd, t_env *env);
 int		is_builtin(char *cmd);
+int		is_directory(char *path);
 int		execute_builtin(t_command *cmd, t_env *env);
+int		external_setup_args(t_command *cmd, char ***args_valid);
+int		external_prepare_path(char **path, char **args_valid, t_env *env);
 
 char	*find_executable(char *cmd, t_env *env);
 char	**env_to_array(t_env *env);
 
 int		error_command_not_found(char *cmd);
 int		error_fork(void);
+int		path_not_found(char *arg);
 void	free_array(char **array);
 
 int		execute_pipeline(t_command *cmd, t_env *env);

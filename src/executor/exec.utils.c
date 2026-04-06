@@ -82,3 +82,12 @@ int	is_builtin(char *cmd)
 		return (1);
 	return (0);
 }
+
+int	is_directory(char *path)
+{
+	struct stat	st;
+
+	if (stat(path, &st) == -1)
+		return (0);
+	return (S_ISDIR(st.st_mode));
+}

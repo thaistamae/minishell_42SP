@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-static void	exec_child_process(t_command *cmd, t_env *env, char *path)
+static void	exec_child_process(t_command *cmd, t_env *env,
+			char *path, char **args)
 {
 	char	**envp;
 
@@ -20,34 +21,32 @@ static void	exec_child_process(t_command *cmd, t_env *env, char *path)
 	if (apply_redirections(cmd) == -1)
 		exit(1);
 	envp = env_to_array(env);
-	execve(path, cmd->args, envp);
+	execve(path, args, envp);
 	perror("minishell: execve");
 	free_array(envp);
-	if (errno == ENOENT)
-		exit(127);
-	else if (errno == EACCES || errno == ENOEXEC || errno == EISDIR)
-		exit(126);
-	else
-		exit(1);
+	exit(1);
 }
 
-//Função para comandos externos ex.: ls, mv, rm, mkdir...
+/* Função principal que mantém todo o fork e wait */
 int	execute_external(t_command *cmd, t_env *env)
 {
 	pid_t	pid;
 	int		status;
 	char	*path;
+	char	**args_valid;
+	int		check;
 
-	if (!cmd || !cmd->args || !cmd->args[0])
-		return (1);
-	path = find_executable(cmd->args[0], env);
-	if (!path)
-		return (error_command_not_found(cmd->args[0]));
+	check = external_setup_args(cmd, &args_valid);
+	if (check != -1)
+		return (check);
+	check = external_prepare_path(&path, args_valid, env);
+	if (check != 0)
+		return (check);
 	pid = fork();
 	if (pid < 0)
 		return (error_fork());
 	if (pid == 0)
-		exec_child_process(cmd, env, path);
+		exec_child_process(cmd, env, path, args_valid);
 	free(path);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
@@ -57,7 +56,6 @@ int	execute_external(t_command *cmd, t_env *env)
 	return (1);
 }
 
-//Execução de funções built-in
 int	execute_builtin(t_command *cmd, t_env *env)
 {
 	int	saved_stdin;
@@ -80,7 +78,6 @@ int	execute_builtin(t_command *cmd, t_env *env)
 	return (ret);
 }
 
-//Valida se command existe
 int	execute_command(t_command *cmd, t_env *env)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])
