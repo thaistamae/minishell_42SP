@@ -24,7 +24,7 @@ static void	exec_child_command(t_command *cmd, t_env *env)
 	if (!cmd->args || !cmd->args[0])
 		_exit(1);
 	if (is_builtin(cmd->args[0]))
-		_exit(execute_builtin(cmd, env));
+		_exit(execute_builtin(cmd, &env));
 	path = find_executable(cmd->args[0], env);
 	if (!path)
 	{
@@ -53,7 +53,7 @@ static int	create_pipe_if_needed(t_command *curent, int pipefd[2])
 	return (0);
 }
 
-static int	fork_and_setup(t_command *cur, t_env *env,
+static int	fork_and_setup(t_command *cur, t_env **env,
 				int prev_fd, int pipefd[2])
 {
 	pid_t	pid;
@@ -74,12 +74,12 @@ static int	fork_and_setup(t_command *cur, t_env *env,
 			safe_close(pipefd[1]);
 		}
 		safe_close(pipefd[0]);
-		exec_child_command(cur, env);
+		exec_child_command(cur, *env);
 	}
 	return (pid);
 }
 
-static int	execute_pipeline_loop(t_command *cmd, t_env *env,
+static int	execute_pipeline_loop(t_command *cmd, t_env **env,
 				pid_t *pids, int count)
 {
 	int			i;
@@ -108,7 +108,7 @@ static int	execute_pipeline_loop(t_command *cmd, t_env *env,
 	return (0);
 }
 
-int	execute_pipeline(t_command *cmd, t_env *env)
+int	execute_pipeline(t_command *cmd, t_env **env)
 {
 	int		count;
 	pid_t	*pids;

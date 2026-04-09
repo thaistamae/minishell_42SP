@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 13:45:41 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/26 23:52:23 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/08 22:55:38 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,10 @@ static int	handle_single_arg(char *arg, t_env **env)
 		return (1);
 	}
 	status = set_env_var(env, key, value);
-	free(key);
-	free(value);
 	return (status);
 }
 
-int	builtin_export(t_command *cmd, t_env *env)
+int	builtin_export(t_command *cmd, t_env **env)
 {
 	int	i;
 	int	ret;
@@ -88,12 +86,12 @@ int	builtin_export(t_command *cmd, t_env *env)
 	if (!cmd || !cmd->args)
 		return (1);
 	if (!cmd->args[1])
-		return (print_export(env));
+		return (print_export(*env));
 	i = 1;
 	ret = 0;
 	while (cmd->args[i])
 	{
-		if (handle_single_arg(cmd->args[i], &env) != 0)
+		if (handle_single_arg(cmd->args[i], env) != 0)
 			ret = 1;
 		i++;
 	}

@@ -36,7 +36,7 @@ static int	unset_error(char *arg)
 	return (1);
 }
 
-int	builtin_unset(t_command *cmd, t_env *env)
+int	builtin_unset(t_command *cmd, t_env **env)
 {
 	int	i;
 	int	ret;
@@ -50,7 +50,7 @@ int	builtin_unset(t_command *cmd, t_env *env)
 		if (!is_valid_unset_identifier(cmd->args[i]))
 			ret = unset_error(cmd->args[i]);
 		else
-			unset_env_var(&env, cmd->args[i]);
+			unset_env_var(env, cmd->args[i]);
 		i++;
 	}
 	return (ret);

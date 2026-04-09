@@ -63,18 +63,9 @@ int	wait_children(pid_t *pids, int n)
 	return (last);
 }
 
+// Após o parser, o pipe se manifesta como cmd->next != NULL.
+// Não existe "|" nos args — por isso basta checar o ponteiro next.
 bool	has_pipe(t_command *cmd)
 {
-	int	i;
-
-	if (!cmd || !cmd->args)
-		return (false);
-	i = 0;
-	while (cmd->args[i])
-	{
-		if (ft_strcmp(cmd->args[i], "|") == 0)
-			return (true);
-		i++;
-	}
-	return (false);
+	return (cmd != NULL && cmd->next != NULL);
 }

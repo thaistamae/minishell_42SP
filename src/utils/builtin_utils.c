@@ -13,16 +13,16 @@
 #include "minishell.h"
 
 // Executa o builtin apropriado
-int	run_builtin(t_command *cmd, t_env *env)
+int	run_builtin(t_command *cmd, t_env **env)
 {
 	if (ft_strcmp(cmd->args[0], "echo") == 0)
 		return (builtin_echo(cmd));
 	else if (ft_strcmp(cmd->args[0], "cd") == 0)
-		return (builtin_cd(cmd, env));
+		return (builtin_cd(cmd, *env));
 	else if (ft_strcmp(cmd->args[0], "pwd") == 0)
 		return (builtin_pwd());
 	else if (ft_strcmp(cmd->args[0], "env") == 0)
-		return (builtin_env(env));
+		return (builtin_env(*env));
 	else if (ft_strcmp(cmd->args[0], "export") == 0)
 		return (builtin_export(cmd, env));
 	else if (ft_strcmp(cmd->args[0], "unset") == 0)

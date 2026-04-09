@@ -32,7 +32,7 @@ static void	process_command(t_shell *shell, t_token *tokens)
 	cmd = parser(tokens);
 	if (cmd)
 	{
-		shell->exit_status = execute_command(cmd, shell->env);
+		shell->exit_status = execute_command(cmd, &shell->env);
 		free_commands(cmd);
 	}
 }

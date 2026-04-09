@@ -56,7 +56,7 @@ int	execute_external(t_command *cmd, t_env *env)
 	return (1);
 }
 
-int	execute_builtin(t_command *cmd, t_env *env)
+int	execute_builtin(t_command *cmd, t_env **env)
 {
 	int	saved_stdin;
 	int	saved_stdout;
@@ -78,13 +78,13 @@ int	execute_builtin(t_command *cmd, t_env *env)
 	return (ret);
 }
 
-int	execute_command(t_command *cmd, t_env *env)
+int	execute_command(t_command *cmd, t_env **env)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (1);
-	if (cmd->next && has_pipe(cmd))
+	if (cmd->next)
 		return (execute_pipeline(cmd, env));
 	if (is_builtin(cmd->args[0]))
 		return (execute_builtin(cmd, env));
-	return (execute_external(cmd, env));
+	return (execute_external(cmd, *env));
 }

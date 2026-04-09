@@ -45,7 +45,7 @@ SRCS = \
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)
 
 LIBFT = $(LIBFT_DIR)/libft.a
