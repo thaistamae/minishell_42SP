@@ -22,5 +22,8 @@ int		builtin_cd(t_command *cmd, t_env *env);
 int		builtin_exit(t_command *cmd);
 int		builtin_export(t_command *cmd, t_env **env);
 int		builtin_unset(t_command *cmd, t_env **env);
+int		is_valid_identifier(char *s);
+char	*get_valid_key(char *arg, char **eq);
+int		export_error(char *arg);
 
 #endif

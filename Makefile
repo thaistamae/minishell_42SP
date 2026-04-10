@@ -16,13 +16,14 @@ SRCS = \
 	$(SRC_DIR)/builtins/env.c \
 	$(SRC_DIR)/builtins/exit.c \
 	$(SRC_DIR)/builtins/export.c \
+	$(SRC_DIR)/builtins/export_utils.c \
 	$(SRC_DIR)/builtins/pwd.c \
 	$(SRC_DIR)/builtins/unset.c \
 	$(SRC_DIR)/env/env_init.c \
 	$(SRC_DIR)/env/env_utils.c \
 	$(SRC_DIR)/executor/executor.c \
-	$(SRC_DIR)/executor/exec.utils.c \
-	$(SRC_DIR)/executor/exec.helpers.c \
+	$(SRC_DIR)/executor/exec_utils.c \
+	$(SRC_DIR)/executor/exec_helpers.c \
 	$(SRC_DIR)/executor/pipes.c \
 	$(SRC_DIR)/executor/redirections.c \
 	$(SRC_DIR)/executor/redir.utils.c \

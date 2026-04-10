@@ -12,6 +12,28 @@
 
 #include "minishell.h"
 
+static void	handle_exec_error(char *path, char **envp)
+{
+	if (errno == ENOEXEC)
+	{
+		execve("/bin/sh", (char *[]){"/bin/sh", path, NULL}, envp);
+		perror("minishell");
+		exit(126);
+	}
+	if (errno == EACCES)
+	{
+		perror("minishell");
+		exit(126);
+	}
+	if (errno == ENOENT)
+	{
+		perror("minishell");
+		exit(127);
+	}
+	perror("minishell: execve");
+	exit(1);
+}
+
 static void	exec_child_process(t_command *cmd, t_env *env,
 			char *path, char **args)
 {
@@ -22,7 +44,7 @@ static void	exec_child_process(t_command *cmd, t_env *env,
 		exit(1);
 	envp = env_to_array(env);
 	execve(path, args, envp);
-	perror("minishell: execve");
+	handle_exec_error(path, envp);
 	free_array(envp);
 	exit(1);
 }

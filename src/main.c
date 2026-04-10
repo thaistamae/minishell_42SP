@@ -68,11 +68,6 @@ static void	shell_loop(t_shell *shell)
 	while (1)
 	{
 		line = readline("minishell$ ");
-		if (g_signal == 130)
-		{
-			shell->exit_status = 130;
-			g_signal = 0;
-		}
 		if (!line)
 		{
 			ft_putstr_fd("exit\n", STDOUT_FILENO);

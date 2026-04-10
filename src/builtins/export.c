@@ -12,22 +12,6 @@
 
 #include "minishell.h"
 
-static int	is_valid_identifier(char *s)
-{
-	int	i;
-
-	if (!s || !s[0] || (!ft_isalpha((unsigned char)s[0]) && s[0] != '_'))
-		return (0);
-	i = 0;
-	while (s[i] && s[i] != '=')
-	{
-		if (!ft_isalnum((unsigned char)s[i]) && s[i] != '_')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 static int	print_export(t_env *env)
 {
 	while (env)
@@ -46,12 +30,18 @@ static int	print_export(t_env *env)
 	return (0);
 }
 
-static int	export_error(char *arg)
+static int	handle_no_equal(char *key, t_env **env)
 {
-	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
-	ft_putstr_fd(arg, STDERR_FILENO);
-	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-	return (1);
+	t_env	*cur;
+
+	cur = *env;
+	while (cur)
+	{
+		if (ft_strcmp(cur->key, key) == 0)
+			return (0);
+		cur = cur->next;
+	}
+	return (set_env_var(env, key, NULL));
 }
 
 static int	handle_single_arg(char *arg, t_env **env)
@@ -61,20 +51,24 @@ static int	handle_single_arg(char *arg, t_env **env)
 	char	*value;
 	int		status;
 
-	if (!is_valid_identifier(arg))
+	key = get_valid_key(arg, &eq);
+	if (!key)
 		return (export_error(arg));
-	eq = ft_strchr(arg, '=');
 	if (!eq)
-		return (set_env_var(env, arg, NULL));
-	key = ft_substr(arg, 0, eq - arg);
+	{
+		status = handle_no_equal(key, env);
+		free(key);
+		return (status);
+	}
 	value = ft_strdup(eq + 1);
-	if (!key || !value)
+	if (!value)
 	{
 		free(key);
-		free(value);
 		return (1);
 	}
 	status = set_env_var(env, key, value);
+	free(key);
+	free(value);
 	return (status);
 }
 

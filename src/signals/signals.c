@@ -12,13 +12,10 @@
 
 #include "minishell.h"
 
-int	g_signal = 0;
-
 // handler para SIGINT no shell interativo (Ctrl+C)
 static void	handle_sigint(int sig)
 {
 	(void)sig;
-	g_signal = 128 + SIGINT;
 	ft_putstr_fd("\n", STDOUT_FILENO);
 	rl_replace_line("", 0);
 	rl_on_new_line();

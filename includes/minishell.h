@@ -34,6 +34,4 @@
 # include "signals.h"
 # include "env.h"
 
-extern int	g_signal;
-
 #endif
