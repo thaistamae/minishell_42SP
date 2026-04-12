@@ -6,13 +6,12 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 21:34:20 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/04/12 11:18:40 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/12 15:14:25 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Counts how many commands exist in the linked list
 int	count_commands(t_command *cmd)
 {
 	int	n;
@@ -26,7 +25,6 @@ int	count_commands(t_command *cmd)
 	return (n);
 }
 
-// Dynamically allocates a pid_t array with size n
 pid_t	*alloc_pids(int n)
 {
 	pid_t	*p;
@@ -35,14 +33,12 @@ pid_t	*alloc_pids(int n)
 	return (p);
 }
 
-// Closes the fds only if valid
 void	safe_close(int fd)
 {
 	if (fd != -1)
 		close(fd);
 }
 
-// Waits for processes and returns their status
 int	wait_children(pid_t *pids, int n)
 {
 	int	i;
@@ -63,8 +59,6 @@ int	wait_children(pid_t *pids, int n)
 	return (last);
 }
 
-// After parsing, the pipe manifests as cmd->next != NULL.
-// There is no "|" in args — so we just need to check the next pointer.
 bool	has_pipe(t_command *cmd)
 {
 	return (cmd != NULL && cmd->next != NULL);

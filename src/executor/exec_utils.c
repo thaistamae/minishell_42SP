@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Duplica strings e cria um array a partir do ambiente
 static char	*resolve_slash_command(char *cmd)
 {
 	if (access(cmd, X_OK) == 0)
@@ -20,7 +19,6 @@ static char	*resolve_slash_command(char *cmd)
 	return (NULL);
 }
 
-// Searches for the command in each PATH directory and returns the complete path
 static char	*find_in_path_dirs(char **dirs, char *cmd)
 {
 	int		i;

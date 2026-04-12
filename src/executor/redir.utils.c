@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Saves the original fds before redirecting
 int	save_std_fds(int *saved_stdin, int *saved_stdout)
 {
 	*saved_stdin = dup(0);
@@ -28,7 +27,6 @@ int	save_std_fds(int *saved_stdin, int *saved_stdout)
 	return (0);
 }
 
-// Opens file for writing (output)
 int	open_output_file(t_redir *redir)
 {
 	int	fd;
@@ -52,14 +50,12 @@ int	open_output_file(t_redir *redir)
 	return (fd);
 }
 
-// Closes fd safely
 void	close_fd(int fd)
 {
 	if (fd > STDERR_FILENO)
 		close(fd);
 }
 
-// Duplicates and closes
 int	dup2_and_close(int fd, int target)
 {
 	if (fd < 0)

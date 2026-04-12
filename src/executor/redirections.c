@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-//Abre arquivo para <
 int	open_input_file(t_redir *redir)
 {
 	int	fd;
@@ -29,7 +28,6 @@ int	open_input_file(t_redir *redir)
 	return (fd);
 }
 
-//Lida com redirecionamento de entrada <
 int	handle_input_redirect(t_redir *redir)
 {
 	int	fd;
@@ -42,7 +40,6 @@ int	handle_input_redirect(t_redir *redir)
 	return (0);
 }
 
-//Lida com redirecionamento de saida >
 int	handle_output_redirect(t_redir *redir)
 {
 	int	fd;
@@ -55,7 +52,6 @@ int	handle_output_redirect(t_redir *redir)
 	return (0);
 }
 
-//lida com heredoc << 
 int	handle_heredoc_redirect(t_redir *redir)
 {
 	int		pipe_fd[2];
@@ -83,7 +79,6 @@ int	handle_heredoc_redirect(t_redir *redir)
 	return (0);
 }
 
-//Aplica os redirecionamentos de acordo com o comando
 int	apply_redirections(t_command *cmd)
 {
 	t_redir	*current;

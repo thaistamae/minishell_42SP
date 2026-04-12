@@ -49,7 +49,6 @@ static void	exec_child_process(t_command *cmd, t_env *env,
 	exit(1);
 }
 
-// Main function that handles all fork and wait
 int	execute_external(t_command *cmd, t_env *env)
 {
 	pid_t	pid;
@@ -78,7 +77,6 @@ int	execute_external(t_command *cmd, t_env *env)
 	return (1);
 }
 
-// Executes the internal commands
 int	execute_builtin(t_command *cmd, t_env **env)
 {
 	int	saved_stdin;

@@ -6,13 +6,12 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 23:11:20 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/04/12 11:14:16 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/12 15:17:09 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//divide "KEY=VALUE" em duas strings alocadas: key e value
 static int	split_env_entry(char *entry, char **key, char **value)
 {
 	char	*c;
@@ -33,7 +32,6 @@ static int	split_env_entry(char *entry, char **key, char **value)
 	return (0);
 }
 
-// cria a lista t_env a partir de char **envp do main
 t_env	*init_env(char **envp)
 {
 	t_env	*env;

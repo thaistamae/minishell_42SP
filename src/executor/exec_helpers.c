@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:04:42 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/04/12 11:18:40 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/12 15:12:12 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	resolve_command_path(char **path, char **args)
 	return (0);
 }
 
-// Helper function to skip empty args and set args_valid
 int	external_setup_args(t_command *cmd, char ***args_valid)
 {
 	int	i;
@@ -56,7 +55,6 @@ int	external_setup_args(t_command *cmd, char ***args_valid)
 	return (-1);
 }
 
-// Helper function to prepare path and validate command
 int	external_prepare_path(char **path, char **args_valid, t_env *env)
 {
 	*path = find_executable(args_valid[0], env);
