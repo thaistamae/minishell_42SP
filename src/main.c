@@ -78,13 +78,13 @@ static void	shell_loop(t_shell *shell)
 	}
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 	t_env	*env;
 
-	(void)ac;
-	(void)av;
+	(void)argc;
+	(void)argv;
 	shell.envp = envp;
 	shell.exit_status = 0;
 	shell.tokens = NULL;

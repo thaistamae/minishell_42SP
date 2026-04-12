@@ -41,7 +41,6 @@ static char	*find_in_path_dirs(char **dirs, char *cmd)
 	return (NULL);
 }
 
-// 
 char	*find_executable(char *cmd, t_env *env)
 {
 	char	**dirs;
@@ -61,7 +60,6 @@ char	*find_executable(char *cmd, t_env *env)
 	return (path_cmd);
 }
 
-// Verifica se o comando é um built-in
 int	is_builtin(char *cmd)
 {
 	if (!cmd)
