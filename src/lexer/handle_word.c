@@ -12,9 +12,6 @@
 
 #include "minishell.h"
 
-// Handles content between single or double quotes
-// Adds characters to the buffer until finding the closing quote
-// Allows variable expansion only within double quotes
 static int	handle_quotes(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	char	quote;
@@ -37,9 +34,6 @@ static int	handle_quotes(char *line, int *i, t_builder *b, t_shell *shell)
 	return (1);
 }
 
-// Builds a word by reading characters from the command line
-// Adds characters to the buffer until finding space or operator
-// Also handles quotes and variable expansion
 static int	build_word(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	while (line[*i] && !ft_isspace(line[*i])
@@ -61,8 +55,6 @@ static int	build_word(char *line, int *i, t_builder *b, t_shell *shell)
 	return (1);
 }
 
-// Adds a character to the builder buffer
-// Reallocates the buffer if capacity is reached
 void	append_char(char **buffer, int *len, int *cap, char c)
 {
 	char	*new_buffer;
@@ -87,8 +79,6 @@ void	append_char(char **buffer, int *len, int *cap, char c)
 	(*len)++;
 }
 
-// Creates a WORD token from the content built in the buffer
-// Calls build_word to read the word and adds the token to the list
 int	handle_word(char *line, int *i, t_token **list, t_shell *shell)
 {
 	t_builder	b;

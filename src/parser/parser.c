@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Free redirs
 static void	free_redirs(t_redir *redir)
 {
 	t_redir	*tmp;
@@ -26,8 +25,6 @@ static void	free_redirs(t_redir *redir)
 	}
 }
 
-// Will traverse the tokens and build the linked list with the commands
-// Commands are separated into argument lists and redirect list
 t_command	*parser(t_token *tokens)
 {
 	t_command	*head;
@@ -55,7 +52,6 @@ t_command	*parser(t_token *tokens)
 	return (head);
 }
 
-// Free the commands
 void	free_commands(t_command *cmd)
 {
 	t_command	*tmp;

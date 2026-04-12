@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-//conta a quantidade de argumentos
 static int	count_args(char **args)
 {
 	int	i;
@@ -25,7 +24,6 @@ static int	count_args(char **args)
 	return (i);
 }
 
-//cria uma comando vazio
 t_command	*new_command(void)
 {
 	t_command	*cmd;
@@ -39,9 +37,6 @@ t_command	*new_command(void)
 	return (cmd);
 }
 
-//adiciona um argumento a lista de argumentos
-//conta quantos argumentos existem na lista
-//cria um novo array no malloc adiciona mais dois para o novo elemento + NULL
 int	add_arg(t_command *cmd, char *value)
 {
 	char	**new;

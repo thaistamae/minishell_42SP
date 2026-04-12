@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Returns error if next token after pipe is empty or pipe
 static int	check_pipe_error(t_token *token)
 {
 	if (!token->next)
@@ -22,7 +21,6 @@ static int	check_pipe_error(t_token *token)
 	return (1);
 }
 
-// Returns error if next token after pipe is empty or not a word
 static int	check_redirection_error(t_token *token)
 {
 	if (!token->next)
@@ -32,7 +30,6 @@ static int	check_redirection_error(t_token *token)
 	return (1);
 }
 
-// Checks if token is a redirection type
 int	is_redirection(t_token_type type)
 {
 	if (type == T_REDIRECT_IN
@@ -43,10 +40,6 @@ int	is_redirection(t_token_type type)
 	return (0);
 }
 
-// Validates the token list
-// If there are no tokens validation is ok
-// First token cannot be pipe
-// Traverses the token list and performs pipe and redirection validations
 int	validate_syntax(t_token *tokens)
 {
 	t_token	*tmp;
