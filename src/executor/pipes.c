@@ -39,7 +39,7 @@ static void	exec_child_command(t_command *cmd, t_env *env)
 	_exit(126);
 }
 
-//Cria o pipe somente se houver próximo comando
+// Creates the pipe only if there is a next command
 static int	create_pipe_if_needed(t_command *curent, int pipefd[2])
 {
 	if (!curent->next)

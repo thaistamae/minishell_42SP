@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 11:12:18 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/22 12:20:46 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/12 10:24:46 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,16 @@ int	builtin_exit(t_command *cmd)
 {
 	int	status;
 
-	ft_putendl_fd("exit", STDERR_FILENO);
 	if (cmd->args[1] && cmd->args[2])
 	{
-		ft_putendl_fd("minishell: exit: too many arguments", STDERR_FILENO);
+		ft_putendl_fd("minishell: too many arguments", STDERR_FILENO);
 		return (1);
 	}
 	if (cmd->args[1])
 	{
 		if (!is_numeric(cmd->args[1]))
 		{
-			ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+			ft_putstr_fd("minishell: ", STDERR_FILENO);
 			ft_putstr_fd(cmd->args[1], STDERR_FILENO);
 			ft_putendl_fd(": numeric argument required", STDERR_FILENO);
 			status = 2;

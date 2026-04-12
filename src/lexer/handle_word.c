@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-//Lida com conteúdo entre aspas simples ou duplas
-//Adiciona os caracteres ao buffer até encontrar a aspas de fechamento
-//Permite expansão de variáveis apenas dentro de aspas duplas
+// Handles content between single or double quotes
+// Adds characters to the buffer until finding the closing quote
+// Allows variable expansion only within double quotes
 static int	handle_quotes(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	char	quote;
@@ -37,9 +37,9 @@ static int	handle_quotes(char *line, int *i, t_builder *b, t_shell *shell)
 	return (1);
 }
 
-//Constrói uma palavra lendo os caracteres da linha de comando
-//Adiciona os caracteres ao buffer até encontrar espaço ou operador
-//Também trata aspas e expansão de variáveis
+// Builds a word by reading characters from the command line
+// Adds characters to the buffer until finding space or operator
+// Also handles quotes and variable expansion
 static int	build_word(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	while (line[*i] && !ft_isspace(line[*i])
@@ -61,8 +61,8 @@ static int	build_word(char *line, int *i, t_builder *b, t_shell *shell)
 	return (1);
 }
 
-//Adiciona um caractere ao buffer do builder
-//Realoca o buffer caso a capacidade seja atingida
+// Adds a character to the builder buffer
+// Reallocates the buffer if capacity is reached
 void	append_char(char **buffer, int *len, int *cap, char c)
 {
 	char	*new_buffer;
@@ -87,8 +87,8 @@ void	append_char(char **buffer, int *len, int *cap, char c)
 	(*len)++;
 }
 
-//Cria um token do tipo WORD a partir do conteúdo construído no buffer
-//Chama build_word para ler a palavra e adiciona o token na lista
+// Creates a WORD token from the content built in the buffer
+// Calls build_word to read the word and adds the token to the list
 int	handle_word(char *line, int *i, t_token **list, t_shell *shell)
 {
 	t_builder	b;

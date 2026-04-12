@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 21:34:20 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/04/04 13:00:16 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/12 11:18:40 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//Conta quantos comandos existem na lista ligada
+// Counts how many commands exist in the linked list
 int	count_commands(t_command *cmd)
 {
 	int	n;
@@ -26,7 +26,7 @@ int	count_commands(t_command *cmd)
 	return (n);
 }
 
-//Aloca dinamicamente um array de pid_t com tamanho n
+// Dynamically allocates a pid_t array with size n
 pid_t	*alloc_pids(int n)
 {
 	pid_t	*p;
@@ -35,14 +35,14 @@ pid_t	*alloc_pids(int n)
 	return (p);
 }
 
-//Fecha os fds apenas se for válido
+// Closes the fds only if valid
 void	safe_close(int fd)
 {
 	if (fd != -1)
 		close(fd);
 }
 
-//Espera os processos e retorna os status
+// Waits for processes and returns their status
 int	wait_children(pid_t *pids, int n)
 {
 	int	i;
@@ -63,8 +63,8 @@ int	wait_children(pid_t *pids, int n)
 	return (last);
 }
 
-// Após o parser, o pipe se manifesta como cmd->next != NULL.
-// Não existe "|" nos args — por isso basta checar o ponteiro next.
+// After parsing, the pipe manifests as cmd->next != NULL.
+// There is no "|" in args — so we just need to check the next pointer.
 bool	has_pipe(t_command *cmd)
 {
 	return (cmd != NULL && cmd->next != NULL);

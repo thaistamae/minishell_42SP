@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-// anda na lista nó por nó
+// Walks through the list node by node
 t_env	*get_env_node(t_env *env, const char *key)
 {
 	while (env)
@@ -24,7 +24,7 @@ t_env	*get_env_node(t_env *env, const char *key)
 	return (NULL);
 }
 
-//Procura o nó
+// Searches for the node
 char	*get_env_value(t_env *env, const char *key)
 {
 	t_env	*node;
@@ -35,7 +35,7 @@ char	*get_env_value(t_env *env, const char *key)
 	return (node->value);
 }
 
-//Helper estatico, cria nó na lista e faz malloc/erro
+// Static helper, creates node in the list and handles malloc/error
 static int	init_new_env_node(t_env **new, const char *key, const char *value)
 {
 	*new = malloc(sizeof(t_env));
@@ -62,7 +62,7 @@ static int	init_new_env_node(t_env **new, const char *key, const char *value)
 	return (0);
 }
 
-//função principal cria/atualiza variáveis
+// Main function creates/updates variables
 int	set_env_var(t_env **env, const char *key, const char *value)
 {
 	t_env	*node;
@@ -91,7 +91,7 @@ int	set_env_var(t_env **env, const char *key, const char *value)
 	return (0);
 }
 
-//remove uma variavel de ambiente da lista encadeada
+// Removes an environment variable from the linked list
 int	unset_env_var(t_env **env, const char *key)
 {
 	t_env	*current;

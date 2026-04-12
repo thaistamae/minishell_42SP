@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidda-s <kaidda-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 19:09:35 by kaidda-s          #+#    #+#             */
-/*   Updated: 2026/03/25 21:43:29 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2026/04/12 11:18:40 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// monta "KEY=VALUE" (se value for NULL, usa só "KEY=")
+// Builds "KEY=VALUE" (if value is NULL, uses only "KEY=")
 static char	*join_key_value(t_env *node)
 {
 	char	*tmp;
@@ -32,7 +32,7 @@ static char	*join_key_value(t_env *node)
 	return (tmp);
 }
 
-// preenche o array envp a partir da lista encadeada
+// Fills the envp array from the linked list
 static int	fill_env_array(t_env *env, char **envp)
 {
 	int		i;

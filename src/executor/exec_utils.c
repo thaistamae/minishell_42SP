@@ -20,7 +20,7 @@ static char	*resolve_slash_command(char *cmd)
 	return (NULL);
 }
 
-// Procura o comando em cada diretório do PATH e retorna o caminho completo
+// Searches for the command in each PATH directory and returns the complete path
 static char	*find_in_path_dirs(char **dirs, char *cmd)
 {
 	int		i;

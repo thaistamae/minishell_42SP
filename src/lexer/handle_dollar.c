@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-//Adiciona uma string inteira ao buffer do builder
+// Adds an entire string to the builder buffer
 static void	append_str(t_builder *b, char *str)
 {
 	int	j;
@@ -25,8 +25,8 @@ static void	append_str(t_builder *b, char *str)
 	}
 }
 
-//Lida com a expansão da variável especial $?
-//Adiciona o exit_status atual do shell ao buffer
+// Handles the expansion of the special variable $?
+// Adds the current shell exit_status to the buffer
 static int	handle_exit_status(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	char	*status;
@@ -42,8 +42,8 @@ static int	handle_exit_status(char *line, int *i, t_builder *b, t_shell *shell)
 	return (1);
 }
 
-//Lê o nome de uma variável de ambiente após o '$'
-//Busca seu valor no envp e adiciona ao buffer
+// Reads the name of an environment variable after '$'
+// Searches for its value in envp and adds to the buffer
 static void	handle_env_var(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	int		start;
@@ -62,8 +62,8 @@ static void	handle_env_var(char *line, int *i, t_builder *b, t_shell *shell)
 	free(var);
 }
 
-//Lida com a expansão de variáveis iniciadas por '$'
-//Pode expandir $?, variáveis de ambiente ou tratar '$' literal
+// Handles the expansion of variables started by '$'
+// Can expand $?, environment variables or treat '$' literally
 void	handle_dollar(char *line, int *i, t_builder *b, t_shell *shell)
 {
 	(*i)++;

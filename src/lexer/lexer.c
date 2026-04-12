@@ -54,8 +54,8 @@ static void	handle_redirection(t_token **list, char *line, int *i)
 	add_token_back(list, new);
 }
 
-//Lê a linha de comando e chama outros métodos
-//para criar uma lista linkada de tokens de acordo com os tipos dos comandos
+// Reads the command line and calls other methods
+// to create a linked list of tokens according to command types
 t_token	*lexer(char *line, t_shell *shell)
 {
 	t_token	*list;
