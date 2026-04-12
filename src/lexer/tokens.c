@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Creates a token
 t_token	*new_token(char *value, t_token_type type)
 {
 	t_token	*new;
@@ -26,7 +25,6 @@ t_token	*new_token(char *value, t_token_type type)
 	return (new);
 }
 
-// Adds a token to the end of the linked list
 void	add_token_back(t_token **list, t_token *new)
 {
 	t_token	*tmp;
@@ -42,7 +40,6 @@ void	add_token_back(t_token **list, t_token *new)
 	tmp->next = new;
 }
 
-// Frees all tokens and memory from the linked list
 void	free_tokens(t_token *list)
 {
 	t_token	*tmp;

@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-//Inclui os tokens de | na lista linkada
 static void	handle_pipe(t_token **list, int *i)
 {
 	t_token	*new;
@@ -24,7 +23,6 @@ static void	handle_pipe(t_token **list, int *i)
 	(*i)++;
 }
 
-//Inclui os tokens de redirection na lista linkada
 static void	handle_redirection(t_token **list, char *line, int *i)
 {
 	t_token	*new;
@@ -54,8 +52,6 @@ static void	handle_redirection(t_token **list, char *line, int *i)
 	add_token_back(list, new);
 }
 
-// Reads the command line and calls other methods
-// to create a linked list of tokens according to command types
 t_token	*lexer(char *line, t_shell *shell)
 {
 	t_token	*list;

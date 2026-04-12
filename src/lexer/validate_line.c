@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-//valida se virgulas foram fechadas
 int	has_unclosed_quotes(char *line)
 {
 	int		i;
@@ -34,7 +33,6 @@ int	has_unclosed_quotes(char *line)
 	return (quote != 0);
 }
 
-//valida se ha caracteres invalidos
 int	has_invalid_chars(char *line)
 {
 	int		i;

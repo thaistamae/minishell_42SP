@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-//cria um redir
 t_redir	*new_redir(t_token_type type, char *file)
 {
 	t_redir	*r;
@@ -26,7 +25,6 @@ t_redir	*new_redir(t_token_type type, char *file)
 	return (r);
 }
 
-//adiciona redir
 void	add_redir(t_command *cmd, t_redir *redir)
 {
 	t_redir	*tmp;
