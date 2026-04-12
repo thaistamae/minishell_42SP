@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Builds "KEY=VALUE" (if value is NULL, uses only "KEY=")
 static char	*join_key_value(t_env *node)
 {
 	char	*tmp;
@@ -32,7 +31,6 @@ static char	*join_key_value(t_env *node)
 	return (tmp);
 }
 
-// Fills the envp array from the linked list
 static int	fill_env_array(t_env *env, char **envp)
 {
 	int		i;
@@ -72,7 +70,6 @@ static	int	env_size(t_env *env)
 	return (size);
 }
 
-// converte lista t_env* em char ** para execve
 char	**env_to_array(t_env *env)
 {
 	char	**envp;

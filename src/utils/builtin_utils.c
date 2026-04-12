@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// Executa o builtin apropriado
 int	run_builtin(t_command *cmd, t_env **env)
 {
 	if (ft_strcmp(cmd->args[0], "echo") == 0)
@@ -32,7 +31,6 @@ int	run_builtin(t_command *cmd, t_env **env)
 	return (1);
 }
 
-// Restaura stdin/stdout originais
 void	restore_std_fds(int saved_stdin, int saved_stdout)
 {
 	dup2(saved_stdin, STDIN_FILENO);
